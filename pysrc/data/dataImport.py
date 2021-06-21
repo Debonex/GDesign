@@ -23,7 +23,7 @@ class DataImport:
 
     def solve_commodities(self):
         commodities = []
-        # quantity of commodities
+        # 商品的数量
         num = 0
         with open(self.path_commodity, 'r', encoding='utf-8') as file:
             line = file.readline()

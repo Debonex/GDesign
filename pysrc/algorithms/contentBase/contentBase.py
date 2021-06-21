@@ -5,9 +5,9 @@ import json
 import math
 
 
-class contentBase:
+class ContentBase:
 
-    def __init__(self, ranknum, recnum) -> None:
+    def __init__(self, ranknum=10, recnum=16):
         self.load_data()
         self.ranknum = ranknum
         self.recnum = recnum
@@ -15,19 +15,17 @@ class contentBase:
     def save_data(self):
         if os.path.exists('data/train.json') and os.path.exists('data/test.json'):
             return
-
-        train = {}
-        test = {}
+        train = {};test = {}
+        #数据库连接
         connection = pymysql.connect(
             host='localhost', user='root', password='root', database='gdesign', charset='utf8mb4')
-
         with connection.cursor() as cursor:
             sql = """select id_order,uid,id_commodity,num_commodity from orders"""
             cursor.execute(sql)
             results = cursor.fetchall()
             for row in results:
-                # test set
-                if(row[0][5:7] != "12"):
+                # 测试集
+                if((row[0][5:7] == "12")or(row[0][5:7]=="11")):
                     if row[1] in test:
                         if row[2] in test[row[1]]:
                             test[row[1]][row[2]] = test[row[1]][row[2]]+row[3]
@@ -35,7 +33,7 @@ class contentBase:
                             test[row[1]][row[2]] = row[3]
                     else:
                         test[row[1]] = {row[2]: row[3]}
-                # train set
+                # 训练集
                 else:
                     if row[1] in train:
                         if row[2] in train[row[1]]:
@@ -44,7 +42,7 @@ class contentBase:
                             train[row[1]][row[2]] = row[3]
                     else:
                         train[row[1]] = {row[2]: row[3]}
-
+        # 保存到本地
         json.dump(train, open("data/train.json", "w"))
         json.dump(test, open("data/test.json", "w"))
         connection.close()
@@ -78,6 +76,7 @@ class contentBase:
         print("loading data completed......")
 
     def recommend(self, uid):
+        uid = str(uid)
         distance_dict = {}
         for k in self.train.keys():
             if k != uid:
@@ -95,7 +94,7 @@ class contentBase:
         return commodity_sorted[:self.recnum]
 
 
-if __name__ == '__main__':
-    control = contentBase(ranknum=10, recnum=4)
-    rec = control.recommend("120405")
-    print(rec)
+# if __name__ == '__main__':
+#     control = ContentBase()
+#     rec = control.recommend(120405)
+#     print(rec)

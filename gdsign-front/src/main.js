@@ -3,6 +3,32 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+/**
+ * cross region
+ */
+import axios from 'axios'
+import Axios from 'axios'
+Vue.prototype.$ajax = axios
+Vue.prototype.$axios = Axios
+Axios.defaults.baseURL = '/api'
+
+
+/**
+ * bootstrap
+ */
+import {
+  BootstrapVue,
+  IconsPlugin
+} from 'bootstrap-vue'
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+/**
+ * less
+ */
+import less from 'less'
+Vue.use(less)
 
 Vue.config.productionTip = false
 
@@ -10,6 +36,8 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  components: {
+    App
+  },
   template: '<App/>'
 })
