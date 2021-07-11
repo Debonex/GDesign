@@ -6,8 +6,8 @@ import tornado.web
 from tornado.ioloop import IOLoop
 from tornado.options import define, options, parse_command_line
  
-# from apps.handlers.VehicleRoutingHandler import VehicleRoutingHandler
-from apps.handlers.HealthChecker import HealthChecker
+from apps.handlers.health_checker import HealthChecker
+from apps.handlers.rec_handler import RecHandler
 from utils.consul_client import ConsulClient
  
 reload(sys)
@@ -31,11 +31,9 @@ def main():
     parse_command_line()
     app = tornado.web.Application(
         [
-            (r"/actuator/health", HealthChecker)
-        ],
-        cookie_secret="__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
-        template_path=os.path.join(os.path.dirname(__file__), "templates"),
-        static_path=os.path.join(os.path.dirname(__file__), "static"),
+            (r"/actuator/health", HealthChecker),
+            (r"/rec/contentBase",RecHandler)
+        ]
     )
     http_server = tornado.httpserver.HTTPServer(app)
     http_server.listen(conf.server_port)
