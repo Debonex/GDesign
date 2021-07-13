@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper xmlns="http://mybatis.org/schema/mybatis-mapper">
+<mapper namespace="com.example.debonex.mapper.CommodityMapper">
     <select id="selectById">
         select * from commodity where id_commodity = #{id}
     </select>
