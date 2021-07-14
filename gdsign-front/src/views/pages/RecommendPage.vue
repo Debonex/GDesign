@@ -22,30 +22,41 @@ import mainLayout from "@/views/layout/MainLayout.vue";
 import gTable from "@/components/GTable.vue";
 export default {
   created() {
-    this.$axios
-      .get("/rec/contentBase")
-      .then((res) => {
-        this.tableData.content = []
-        res.data.data.forEach(item=>{
-          this.tableData.content.push([item.id,item.title,"0","null"])
-        })
+    this.$api.core.rec
+      .contentBase()
+      .then(res => {
+        this.tableData.content = [];
+        res.data.data.forEach(item => {
+          this.tableData.content.push([item.id, item.title, "0", "null"]);
+        });
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
+    // this.$axios
+    //   .get("/rec/contentBase")
+    //   .then((res) => {
+    //     this.tableData.content = []
+    //     res.data.data.forEach(item=>{
+    //       this.tableData.content.push([item.id,item.title,"0","null"])
+    //     })
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   },
   data() {
     return {
       tableData: {
         cols: ["编号", "名称", "单价", "推荐理由"],
-        content: [],
-      },
+        content: []
+      }
     };
   },
   components: {
     mainLayout,
-    gTable,
-  },
+    gTable
+  }
 };
 </script>
 

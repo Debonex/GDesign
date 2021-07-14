@@ -3,14 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-/**
- * cross region
- */
-import axios from 'axios'
-import Axios from 'axios'
-Vue.prototype.$ajax = axios
-Vue.prototype.$axios = Axios
-Axios.defaults.baseURL = '/api'
+
+import api from './api/api'
+Vue.use(api)
 
 
 /**

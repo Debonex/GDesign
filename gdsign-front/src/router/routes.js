@@ -15,7 +15,7 @@ const index = [
   }
 ];
 
-const main = [
+const core = [
   {
     path: "/recommend",
     component: () => import("@/views/pages/RecommendPage")
@@ -34,6 +34,6 @@ const main = [
   }
 ];
 
-const routes = _.concat(index, main);
+const routes = _.concat(index, core);
 
 export default routes;
