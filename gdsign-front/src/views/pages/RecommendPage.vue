@@ -25,7 +25,10 @@ export default {
     this.$axios
       .get("/rec/contentBase")
       .then((res) => {
-        console.log(res);
+        this.tableData.content = []
+        res.data.data.forEach(item=>{
+          this.tableData.content.push([item.id,item.title,"0","null"])
+        })
       })
       .catch((err) => {
         console.log(err);
@@ -35,7 +38,7 @@ export default {
     return {
       tableData: {
         cols: ["编号", "名称", "单价", "推荐理由"],
-        content: [["1", "a", "b", "c"]],
+        content: [],
       },
     };
   },
