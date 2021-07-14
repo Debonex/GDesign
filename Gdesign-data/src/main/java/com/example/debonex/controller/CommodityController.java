@@ -1,11 +1,12 @@
 package com.example.debonex.controller;
 
-import com.example.debonex.mapper.CommodityMapper;
 import com.example.debonex.pojo.Commodity;
+import com.example.debonex.service.CommodityService;
+import com.example.debonex.vo.CommodityIdListVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 /**
@@ -15,11 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/commodity")
 public class CommodityController {
 
+
     @Autowired
-    CommodityMapper commodityMapper;
+    CommodityService commodityService;
 
     @RequestMapping("/findById")
-    public Commodity findById(@RequestParam Integer commodityId){
-        return commodityMapper.selectById(commodityId);
+    public Commodity findById(@RequestParam Integer commodityId) {
+        return commodityService.findById(commodityId);
+    }
+
+    @RequestMapping(value = "/findListById", method = RequestMethod.POST)
+    public List<Commodity> findCommodityListById(@RequestBody CommodityIdListVO commodityIdListVO) {
+        return commodityService.findCommodityListById(commodityIdListVO.getCommodityIdList());
     }
 }

@@ -1,3 +1,4 @@
+import json
 from abc import ABC
 
 import tornado.web
@@ -11,6 +12,8 @@ cb = ContentBase()
 class RecHandler(tornado.web.RequestHandler, ABC):
     def get(self):
         res = cb.recommend(120405)
-        print({"data": res})
-        response = dr.getCommodity(20)
-        self.finish({"data": res, "response": response.content.decode()})
+        idList = []
+        for item in res:
+            idList.append(item[0])
+        commodityList = dr.getCommodityList(idList)
+        self.finish({"data": json.loads(commodityList.text)})
