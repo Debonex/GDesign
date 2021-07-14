@@ -1,42 +1,49 @@
 import os
 import socket
+import sys
+
+
 # import manage
- 
+
 class Config(object):  # 默认配置
     DEBUG = False
     hostname = socket.gethostname()
     ip = socket.gethostbyname(hostname)
- 
+
     application_name = "rec-service"
     application_version = "1.0"
     server_port = 8083
- 
+
     # get attribute
     def __getitem__(self, key):
         return self.__getattribute__(key)
- 
+
+
 class DevelopmentConfig(Config):  # 开发环境
     consul_address = "127.0.0.1"
     consul_port = "8500"
     consul_healthCheckPath = "http://127.0.0.1:8083/actuator/health"
     consul_tags = "dev"
- 
+
+
 class ProductionConfig(Config):  # 生产环境
     consul_address = "127.0.0.1"
     consul_port = "8500"
     consul_healthCheckPath = "http://127.0.0.1:8083/actuator/health"
     consul_tags = "prod"
- 
+
+
 # 环境映射关系
 mapping = {
     'dev': DevelopmentConfig,
     'pro': ProductionConfig,
     'default': DevelopmentConfig
 }
- 
+
+
 # 根据脚本参数，来决定用那个环境配置
-import sys
- 
+
+
 def getConfig():
     print(sys.argv)
     num = len(sys.argv) - 1  # 参数个数

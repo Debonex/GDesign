@@ -1,5 +1,8 @@
 package com.example.debonex.pojo;
 
+/**
+ * @author Debonex
+ */
 public class Commodity {
     private Integer id;
     private String title;

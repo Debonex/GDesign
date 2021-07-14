@@ -5,7 +5,7 @@ from consulate import Consul
 import requests
  
  
-class ConsulClient():
+class ConsulClient:
     def __init__(self, host=None, port=None, token=None):  # 初始化，指定consul主机，端口，和token
         self.host = host  # consul 主机
         self.port = port  # consul 端口
@@ -48,7 +48,7 @@ class ConsulClient():
                     port = serv.get('Service').get('Port')
                     serviceList.append({'port': port, 'address': address})
         if len(serviceList) == 0:
-            raise Exception('no serveice can be used')
+            raise Exception('no service can be used')
         else:
             service = serviceList[randint(0, len(serviceList) - 1)]  # 随机获取一个可用的服务实例
             return service['address'], int(service['port'])
