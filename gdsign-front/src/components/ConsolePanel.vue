@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full">
+  <div class="w-full">
     <slot> </slot>
     <footer class="bg-white text-secondary text-center">
       Copyright &copy; 2021. NJU Software Academy.

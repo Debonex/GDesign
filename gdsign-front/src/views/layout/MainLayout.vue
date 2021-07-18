@@ -1,33 +1,29 @@
 <template>
-  <div class="container-fluid">
-    <div class="row">
-      <navbar class="w-100" />
-    </div>
-    <div class="row">
-      <div class="col-2">
-        <sidebar />
+  <div>
+    <navbar class="w-100" />
+    <div class="flex">
+      <div class="w-1/6 max-w-max">
+        <g-sidebar />
       </div>
-      <div class="col-10">
-        <console-panel>
-          <router-view></router-view>
-        </console-panel>
-      </div>
+      <console-panel class="m-4">
+        <router-view></router-view>
+      </console-panel>
     </div>
   </div>
 </template>
 
 <script>
-import sidebar from "@/components/Sidebar.vue";
 import navbar from "@/components/Navbar.vue";
-import consolePanel from "@/components/ConsolePanel.vue";
+import ConsolePanel from "@/components/ConsolePanel.vue";
+import GSidebar from "../../components/GSidebar.vue";
 export default {
   components: {
-    consolePanel,
-    sidebar,
+    ConsolePanel,
     navbar,
+    GSidebar
   },
   data() {
     return {};
-  },
+  }
 };
 </script>
