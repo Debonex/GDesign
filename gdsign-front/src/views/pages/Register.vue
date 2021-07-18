@@ -2,7 +2,7 @@
   <index-layout>
     <b-form
       @submit="onSubmit"
-      class="w-5/6 sm:w-96 bg-gray-200 p-12 rounded-lg"
+      class="w-5/6 sm:w-96 bg-gray-200 p-12 rounded-lg z-10"
     >
       <div class="text-2xl text-center">登录</div>
       <b-form-group class="mt-10" label="用户名" label-for="input-username">
@@ -31,7 +31,7 @@
         >
         </b-form-input>
       </b-form-group>
-      <b-button class="mt-6 w-full" type="submit" variant="success"
+      <b-button class="mt-6 w-full" type="submit" variant="primary"
         >注册</b-button
       >
     </b-form>

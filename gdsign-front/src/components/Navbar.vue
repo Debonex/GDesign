@@ -3,14 +3,18 @@
     <b-navbar
       toggleable="lg"
       type="dark"
-      class="container-navbar-main bg-gray-800 ml-auto"
+      class="bg-gradient-to-r from-gray-800 to-blue-600 ml-auto"
     >
-      <b-navbar-brand href="#"><i class="fa fa-area-chart mr-2" />Gdesign-rec</b-navbar-brand>
+      <b-navbar-brand href="#">
+        <i class="fa fa-area-chart mr-2" />Gdesign-<span class="text-blue-400 animate-pulse">rec</span>
+      </b-navbar-brand>
+      <div class="container-navbar-svg h-12 w-full"></div>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-item-dropdown right>
             <template v-slot:button-content>
+              <b-avatar variant="dark"></b-avatar>
               <em>User</em>
             </template>
             <b-dropdown-item href="#">Profile</b-dropdown-item>

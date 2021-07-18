@@ -1,6 +1,6 @@
 <template>
   <index-layout>
-    <b-form class="w-5/6 sm:w-96 bg-gray-200 p-12 rounded-lg">
+    <b-form class="w-5/6 sm:w-96 bg-gray-200 p-12 rounded-lg z-10">
       <div class="text-2xl text-center">登录</div>
       <b-form-group class="mt-10" label="用户名" label-for="input-username">
         <b-form-input
@@ -19,10 +19,10 @@
         >
         </b-form-input>
       </b-form-group>
-      <router-link class="block mt-6 text-right text-success" to="/register"
+      <router-link class="block mt-6 text-right text-primary" to="/register"
         >还没有账号？点我注册</router-link
       >
-      <b-button class="mt-6 w-full" variant="success" @click="onSubmit"
+      <b-button class="mt-6 w-full" variant="primary" @click="onSubmit"
         >登录</b-button
       >
     </b-form>
