@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <navbar class="navbar-main" />
+      <navbar class="w-100" />
     </div>
     <div class="row">
       <div class="col-2">
@@ -31,7 +31,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less" scoped>
-@import "../../assets/less/views/layout/main-layout";
-</style>

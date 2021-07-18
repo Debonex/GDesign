@@ -5,61 +5,66 @@
 each(range(@spaces-size), {
   @space: extract(@spaces, @index);
   @space-value: extract(@spaces-value, @index);
-
+  @x: extract(@space-value,1);
+  @y: extract(@space-value,2);
   .pa-@{space} {
-    padding: extract(@space-value, 1) extract(@space-value, 2) !important;
+    padding: @x @y !important;
   }
 
   .pl-@{space} {
-    padding: extract(@space-value, 1) extract(@space-value, 2) !important;
+    padding-left: @x !important;
   }
 
   .pr-@{space} {
-    padding: extract(@space-value, 1) extract(@space-value, 2) !important;
+    padding-right: @x !important;
   }
 
   .pt-@{space} {
-    padding: extract(@space-value, 1) extract(@space-value, 2) !important;
+    padding-top: @y !important;
   }
 
   .pb-@{space} {
-    padding: extract(@space-value, 1) extract(@space-value, 2) !important;
+    padding-bottom: @y !important;
   }
 
   .px-@{space} {
-    padding: extract(@space-value, 1) extract(@space-value, 2) !important;
+    padding-left: @x !important;
+    padding-right: @x !important;
   }
 
   .py-@{space} {
-    padding: extract(@space-value, 1) extract(@space-value, 2) !important;
+    padding-top: @y !important;
+    padding-bottom: @y !important;
   }
 
   .ma-@{space} {
-    margin: extract(@space-value, 1) extract(@space-value, 2) !important;
+    margin: @x @y !important;
   }
 
   .ml-@{space} {
-    margin: extract(@space-value, 1) extract(@space-value, 2) !important;
+    margin-left: @x !important;
   }
 
   .mr-@{space} {
-    margin: extract(@space-value, 1) extract(@space-value, 2) !important;
+    margin-right: @x !important;
   }
 
   .mt-@{space} {
-    margin: extract(@space-value, 1) extract(@space-value, 2) !important;
+    margin-top: @y !important;
   }
 
   .mb-@{space} {
-    margin: extract(@space-value, 1) extract(@space-value, 2) !important;
+    margin-bottom: @y !important;
   }
 
   .mx-@{space} {
-    margin: extract(@space-value, 1) extract(@space-value, 2) !important;
+    @margin-left: @x !important;
+    @margin-right: @x !important;
   }
 
   .my-@{space} {
-    margin: extract(@space-value, 1) extract(@space-value, 2) !important;
+    margin-top: @y !important;
+    margin-bottom: @y !important;
   }
 });
 

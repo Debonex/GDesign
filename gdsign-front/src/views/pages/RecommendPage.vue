@@ -50,5 +50,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import "../../assets/less/views/pages/RecommendPage";
+@import "../../assets/less/pages/RecommendPage";
 </style>

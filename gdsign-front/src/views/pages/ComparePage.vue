@@ -281,6 +281,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import "../../assets/less/views/pages/ComparePage.less";
+@import "../../assets/less/pages/ComparePage.less";
 
 </style>
