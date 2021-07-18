@@ -9,7 +9,7 @@
       </div>
       <div class="col-10">
         <console-panel>
-          <slot></slot>
+          <router-view></router-view>
         </console-panel>
       </div>
     </div>

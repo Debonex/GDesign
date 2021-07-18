@@ -1,4 +1,4 @@
-const _ = require('lodash')
+const _ = require("lodash");
 
 const index = [
   {
@@ -17,20 +17,30 @@ const index = [
 
 const core = [
   {
-    path: "/recommend",
-    component: () => import("@/views/pages/RecommendPage")
-  },
-  {
-    path: "/compare",
-    component: () => import("@/views/pages/ComparePage")
-  },
-  {
-    path: "/order",
-    component: () => import("@/views/pages/OrderPage")
-  },
-  {
-    path: "/commodity",
-    component: () => import("@/views/pages/CommodityPage")
+    path: "/home",
+    component: () => import("@/views/layout/MainLayout"),
+    children: [
+      {
+        path: "/",
+        redirect: "/order"
+      },
+      {
+        path: "/recommend",
+        component: () => import("@/views/pages/RecommendPage")
+      },
+      {
+        path: "/compare",
+        component: () => import("@/views/pages/ComparePage")
+      },
+      {
+        path: "/order",
+        component: () => import("@/views/pages/OrderPage")
+      },
+      {
+        path: "/commodity",
+        component: () => import("@/views/pages/CommodityPage")
+      }
+    ]
   }
 ];
 

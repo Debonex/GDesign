@@ -1,19 +1,9 @@
 <template>
-  <main-layout>
-      commodity
-  </main-layout>
+  <div>
+    commodity
+  </div>
 </template>
 
 <script>
-import mainLayout from '@/views/layout/MainLayout.vue'
-export default {
-    components: {
-        mainLayout
-    }
-}
+export default {};
 </script>
-
-<style lang="less" scoped>
-
-
-</style>
