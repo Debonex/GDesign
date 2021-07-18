@@ -93,10 +93,12 @@ class DataImport:
     def import_orders_single(self, path):
         orders = self.solve_orders(path)
         with self.connection.cursor() as cursor:
+            cursor.execute("SET FOREIGN_KEY_CHECKS = 0;")
             for item in orders:
                 sql = """INSERT INTO ORDERS(id_order,id_commodity,num_commodity,amount_order,commission1,id_distributor1,commission2,id_distributor2,commission3,id_distributor3,uid)
                 VALUES('%s','%d','%d','%f','%f','%d','%f','%d','%f','%d','%d')""" % (item['id_order'], item["id_commodity"], item["num_commodity"], item["amount_order"], item["commission1"], item["id_distributor1"],item["commission2"],item["id_distributor2"],item["commission3"],item["id_distributor3"],item["uid"])
                 cursor.execute(sql)
+            cursor.execute("SET FOREIGN_KEY_CHECKS = 1;")
         self.connection.commit()
         print('importing %s finished. %d items in total......' %
               (path, len(orders)))

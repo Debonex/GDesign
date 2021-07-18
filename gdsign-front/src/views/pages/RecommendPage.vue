@@ -33,17 +33,6 @@ export default {
       .catch(err => {
         console.log(err);
       });
-    // this.$axios
-    //   .get("/rec/contentBase")
-    //   .then((res) => {
-    //     this.tableData.content = []
-    //     res.data.data.forEach(item=>{
-    //       this.tableData.content.push([item.id,item.title,"0","null"])
-    //     })
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
   },
   data() {
     return {

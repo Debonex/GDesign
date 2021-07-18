@@ -1,0 +1,119 @@
+@import "./vars.less";
+
+@spaces-size: length(@spaces);
+
+each(range(@spaces-size), {
+  @space: extract(@spaces, @index);
+  @space-value: extract(@spaces-value, @index);
+
+  .pa-@{space} {
+    padding: extract(@space-value, 1) extract(@space-value, 2) !important;
+  }
+
+  .pl-@{space} {
+    padding: extract(@space-value, 1) extract(@space-value, 2) !important;
+  }
+
+  .pr-@{space} {
+    padding: extract(@space-value, 1) extract(@space-value, 2) !important;
+  }
+
+  .pt-@{space} {
+    padding: extract(@space-value, 1) extract(@space-value, 2) !important;
+  }
+
+  .pb-@{space} {
+    padding: extract(@space-value, 1) extract(@space-value, 2) !important;
+  }
+
+  .px-@{space} {
+    padding: extract(@space-value, 1) extract(@space-value, 2) !important;
+  }
+
+  .py-@{space} {
+    padding: extract(@space-value, 1) extract(@space-value, 2) !important;
+  }
+
+  .ma-@{space} {
+    margin: extract(@space-value, 1) extract(@space-value, 2) !important;
+  }
+
+  .ml-@{space} {
+    margin: extract(@space-value, 1) extract(@space-value, 2) !important;
+  }
+
+  .mr-@{space} {
+    margin: extract(@space-value, 1) extract(@space-value, 2) !important;
+  }
+
+  .mt-@{space} {
+    margin: extract(@space-value, 1) extract(@space-value, 2) !important;
+  }
+
+  .mb-@{space} {
+    margin: extract(@space-value, 1) extract(@space-value, 2) !important;
+  }
+
+  .mx-@{space} {
+    margin: extract(@space-value, 1) extract(@space-value, 2) !important;
+  }
+
+  .my-@{space} {
+    margin: extract(@space-value, 1) extract(@space-value, 2) !important;
+  }
+});
+
+.mt-auto,
+.my-auto {
+  margin-top: auto !important;
+}
+
+.ml-auto,
+.mx-auto {
+  margin-left: auto !important;
+}
+
+.mb-auto,
+.my-auto {
+  margin-bottom: auto !important;
+}
+
+.mr-auto,
+.mx-auto {
+  margin-right: auto !important;
+}
+
+.fit {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.full-height {
+  height: 100% !important;
+}
+
+.full-width {
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.window-height {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  height: 100vh !important;
+}
+
+.window-width {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100vw !important;
+}
+
+.block {
+  display: block !important;
+}
+
+.inline-block {
+  display: inline-block !important;
+}
