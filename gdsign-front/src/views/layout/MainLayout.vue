@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <navbar class="w-100" />
-    <div class="flex">
-      <div class="w-1/6 max-w-max">
-        <g-sidebar />
-      </div>
-      <console-panel class="m-4">
+  <div class="fit">
+    <navbar/>
+    <div class="flex fit">
+      <g-sidebar/>
+      <console-panel class="m-4 flex-grow flex-shrink-0">
         <router-view></router-view>
       </console-panel>
     </div>

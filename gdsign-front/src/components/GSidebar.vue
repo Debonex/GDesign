@@ -1,6 +1,6 @@
 <template>
-  <b-navbar class="min-w-min h-screen items-start shadow-lg">
-    <b-nav vertical class="pr-20 pl-8">
+  <b-navbar class="w-max h-full items-start shadow-lg">
+    <b-nav vertical class="sm:pr-5 sm:pl-5 md:pr-10 md:pl-10 w-max">
       <b-navbar-brand class="mt-10 border-b-2 font-semibold">业务操作</b-navbar-brand>
       <b-nav-item class="mt-4" @click="$router.push('/order')" active>
         <i class="fa fa-shopping-cart mr-2"></i>订单操作
