@@ -1,23 +1,26 @@
 <template>
   <div class="fit">
-    <navbar/>
+    <g-navbar />
     <div class="flex fit">
-      <g-sidebar/>
-      <console-panel class="m-4 flex-grow flex-shrink-0">
+      <g-sidebar />
+      <div class="bg-white shadow-lg max-h-max m-4 flex-grow flex-shrink-0">
         <router-view></router-view>
-      </console-panel>
+      </div>
     </div>
+    <footer
+      class="bg-gradient-to-r from-gray-800 to-blue-600 text-secondary text-center py-1"
+    >
+      Copyright &copy; 2021. NJU Software Academy.
+    </footer>
   </div>
 </template>
 
 <script>
-import navbar from "@/components/Navbar.vue";
-import ConsolePanel from "@/components/ConsolePanel.vue";
-import GSidebar from "../../components/GSidebar.vue";
+import GNavbar from "@/components/GNavbar.vue";
+import GSidebar from "@/components/GSidebar.vue";
 export default {
   components: {
-    ConsolePanel,
-    navbar,
+    GNavbar,
     GSidebar
   },
   data() {

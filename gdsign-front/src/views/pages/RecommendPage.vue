@@ -1,46 +1,87 @@
 <template>
-  <div class="row d-flex justify-content-center">
-    <div class="col-lg-12">
-      <div class="card d-flex justify-content-center container-card">
-        <div class="card-body">
-          <div class="d-flex justify-content-between">
-            <div class="col-4"></div>
-            <h3 class="mb-3 col-3">商品推荐</h3>
-            <div class="col-4 d-flex justify-content-end p-0"></div>
-          </div>
-          <g-table v-bind:tableData="tableData"></g-table>
-        </div>
-      </div>
+  <div class="flex flex-column items-center">
+    <div
+      class="flex md:pl-12 py-3 bg-gradient-to-r from-gray-800 to-blue-600 text-3xl text-white w-full"
+    >
+      <p>商品推荐</p>
+
+      <b-dropdown
+        class="ml-12"
+        :disabled="busy"
+        text="推荐数量"
+        variant="success"
+      >
+        <b-dropdown-item href="#">10</b-dropdown-item>
+        <b-dropdown-item href="#">15</b-dropdown-item>
+        <b-dropdown-item href="#">20</b-dropdown-item>
+      </b-dropdown>
+
+      <b-button class="ml-10" :disabled="busy" variant="success">
+        <i class="fa fa-refresh mr-1" />换一批
+      </b-button>
+
+      <a
+        class="fa fa-sign-out :hover-none ml-auto mr-12 sticky right-2"
+        href="#"
+        v-b-tooltip.hover
+        title="导出商品单"
+      />
     </div>
+
+    <b-overlay :show="busy" class="w-full">
+      <b-table hover bordered :fields="fields" :items="content"></b-table>
+    </b-overlay>
   </div>
 </template>
 
 <script>
-import gTable from "@/components/GTable.vue";
 export default {
+  data() {
+    return {
+      fields: [
+        {
+          key: "id",
+          label: "商品编号",
+          sortable: true,
+          tdClass: "font-bold text-center"
+        },
+        {
+          key: "title",
+          label: "商品名称",
+          sortable: true
+        },
+        {
+          key: "value",
+          label: "商品单价(元)",
+          sortable: true
+        },
+        {
+          key: "resason",
+          label: "推荐理由"
+        }
+      ],
+      content: [],
+      busy: false
+    };
+  },
   created() {
     this.$api.core.rec
       .contentBase()
       .then(res => {
-        this.tableData.content = [];
+        this.content = [];
         res.data.data.forEach(item => {
-          this.tableData.content.push([item.id, item.title, "0", "null"]);
+          this.content.push({
+            id: item.id,
+            title: item.title,
+            value: "0",
+            reason: "todo"
+          });
         });
+        console.log(this.content);
       })
       .catch(err => {
         console.log(err);
       });
-  },
-  data() {
-    return {
-      tableData: {
-        cols: ["编号", "名称", "单价", "推荐理由"],
-        content: []
-      }
-    };
-  },
-  components: {
-    gTable
   }
 };
 </script>
