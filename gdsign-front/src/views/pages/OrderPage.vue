@@ -1,28 +1,16 @@
 <template>
-  <div>
-    <b-card no-body>
-      <b-card-header class="bg-gradient-to-r from-gray-800 to-blue-600">
-        <b-nav card-header tabs>
-          <b-nav-item class="mr-4" active>
-            默认排序<i class="fa fa-sort ml-1" />
-          </b-nav-item>
-          <b-nav-item class="mr-4">
-            时间：从早到晚<i class="fa fa-sort ml-1" />
-          </b-nav-item>
-          <b-nav-item class="mr-4">
-            金额：从高到底<i class="fa fa-sort ml-1" />
-          </b-nav-item>
-        </b-nav>
-      </b-card-header>
-
-      <b-card-body class="text-center">
-        <b-card-text>
-          你的订单信息都在这里了
-        </b-card-text>
-
-        <b-button variant="primary">哇！太好了！</b-button>
-      </b-card-body>
-    </b-card>
+  <div class="flex flex-column items-center">
+    <div
+      class="flex md:pl-12 py-3 bg-gradient-to-r from-gray-800 to-blue-600 text-3xl text-white w-full"
+    >
+      <p>订单操作</p>
+      <b-button class="ml-10" :disabled="busy" variant="success">
+        <i class="fa fa-plus mr-1" />新增订单
+      </b-button>
+    </div>
+    <b-overlay :show="busy" class="w-full">
+      <b-table hover bordered :fields="fields" :items="content"></b-table>
+    </b-overlay>
   </div>
 </template>
 
@@ -30,7 +18,35 @@
 export default {
   data() {
     return {
-      orderList:[]
+      fields: [
+        {
+          key: "title",
+          label: "商品名称",
+          sortable: true,
+          tdClass: "font-bold text-center"
+        },
+        {
+          key: "num-commodity",
+          label: "商品数量",
+          sortable: true
+        },
+        {
+          key: "value",
+          label: "商品单价(元)",
+          sortable: true
+        },
+        {
+          key: "amount-order",
+          label: "订单金额(元)",
+          sortable: true
+        },
+        {
+          key: "uid",
+          label: "用户ID"
+        }
+      ],
+      content: [],
+      busy: false
     };
   }
 };
