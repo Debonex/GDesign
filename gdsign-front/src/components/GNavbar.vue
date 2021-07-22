@@ -30,5 +30,5 @@ export default {};
 </script>
 
 <style lang="less" scoped>
-@import "../assets/less/components/navbar.less";
+@import "../assets/style/components/navbar.less";
 </style>
