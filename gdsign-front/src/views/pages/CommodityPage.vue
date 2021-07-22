@@ -1,11 +1,11 @@
 <template>
   <div class="flex flex-column items-center">
     <div
-      class="flex md:pl-12 py-3 bg-gradient-to-r from-gray-800 to-blue-600 text-3xl text-white w-full"
+      class="flex pl-2 md:pl-12 py-3 bg-gradient-to-r from-gray-800 to-blue-600 text-3xl text-white w-full"
     >
       <p>商品上传</p>
 
-      <b-button class="ml-10" :disabled="busy" variant="success">
+      <b-button class="ml-10" :disabled="busy" variant="success" v-b-toggle.sidebar-commodity-add>
         <i class="fa fa-plus mr-1" />新增商品
       </b-button>
     </div>

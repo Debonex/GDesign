@@ -4,7 +4,7 @@
       @submit="onSubmit"
       class="w-5/6 sm:w-96 bg-gray-200 p-12 rounded-lg z-10"
     >
-      <div class="text-2xl text-center">登录</div>
+      <div class="text-2xl text-center">注册</div>
       <b-form-group class="mt-10" label="用户名" label-for="input-username">
         <b-form-input
           v-model="form.username"
@@ -54,7 +54,9 @@ export default {
     };
   },
   methods: {
-    onSubmit: function(e) {}
+    onSubmit: function(e) {
+      this.$router.push('/login')
+    }
   }
 };
 </script>

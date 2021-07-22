@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-column items-center">
     <div
-      class="flex md:pl-12 py-3 bg-gradient-to-r from-gray-800 to-blue-600 text-3xl text-white w-full"
+      class="flex pl-2 md:pl-12 py-3 bg-gradient-to-r from-gray-800 to-blue-600 text-3xl text-white w-full"
     >
       <p>订单操作</p>
       <b-button class="ml-10" :disabled="busy" variant="success">

@@ -2,8 +2,8 @@
   <div class="fit">
     <g-navbar />
     <div class="flex fit">
-      <g-sidebar />
-      <div class="bg-white shadow-lg max-h-max m-4 flex-grow flex-shrink-0">
+      <g-sidebar class="pr-2 pl-2 md:pr-10 md:pl-10" />
+      <div class="bg-white shadow-lg max-h-max m-8 flex-grow flex-shrink-0">
         <router-view></router-view>
       </div>
     </div>
