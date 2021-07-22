@@ -85,7 +85,3 @@ export default {
   }
 };
 </script>
-
-<style lang="less" scoped>
-@import "../../assets/less/pages/RecommendPage";
-</style>
