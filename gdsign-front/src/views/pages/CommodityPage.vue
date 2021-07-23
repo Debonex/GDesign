@@ -13,6 +13,11 @@
     <b-overlay :show="busy" class="w-full">
       <b-table hover bordered :fields="fields" :items="content"></b-table>
     </b-overlay>
+
+    <b-sidebar id="sidebar-commodity-add" title="商品上传" right shadow>
+      <div class="pa-3">
+      </div>
+    </b-sidebar>
   </div>
 </template>
 
