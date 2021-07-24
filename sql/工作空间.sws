@@ -6,5 +6,5 @@
 	<Local Expanded="Yes">
 		<Model Expanded="Yes" ID="{42715F91-676D-44BE-AC79-D6F1CE6A0AE7}" Name="Gdesign" Selected="Yes" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="Gdesign.pdm"/>
 	</Local>
-	<BrowserModule Name="仓库(&amp;R)"/>
+	<BrowserModule Name="Repository"/>
 </Workspace>
