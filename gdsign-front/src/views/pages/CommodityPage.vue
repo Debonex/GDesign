@@ -50,6 +50,10 @@ export default {
           sortable: true,
         },
         {
+          key: "specification",
+          label: "商品规格",
+        },
+        {
           key: "value",
           label: "商品单价(元)",
           sortable: true,
@@ -63,6 +67,7 @@ export default {
       busy: false,
       commodity: {
         title: "",
+        specification: "",
         value: 0.0,
       },
     };

@@ -10,14 +10,34 @@ public class Commodity {
     private String hire;
     private String timelimit;
     private String region;
+    private Double value;
+    private String specification;
 
-    public Commodity(Integer id, String title, Integer entity, String hire, String timelimit, String region) {
+    public Commodity(Integer id, String title, Integer entity, String hire, String timelimit, String region, Double value, String specification) {
         this.id = id;
         this.title = title;
         this.entity = entity;
         this.hire = hire;
         this.timelimit = timelimit;
         this.region = region;
+        this.value = value;
+        this.specification = specification;
+    }
+
+    public Double getValue() {
+        return value;
+    }
+
+    public void setValue(Double value) {
+        this.value = value;
+    }
+
+    public String getSpecification() {
+        return specification;
+    }
+
+    public void setSpecification(String specification) {
+        this.specification = specification;
     }
 
     public Integer getId() {

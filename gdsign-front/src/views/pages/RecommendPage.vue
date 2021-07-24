@@ -39,6 +39,10 @@ export default {
           sortable: true,
         },
         {
+          key: "specification",
+          label: "商品规格",
+        },
+        {
           key: "value",
           label: "商品单价(元)",
           sortable: true,
@@ -61,7 +65,8 @@ export default {
           this.content.push({
             id: item.id,
             title: item.title,
-            value: "0",
+            value: item.value,
+            specification: item.specification,
             reason: "todo",
           });
         });
