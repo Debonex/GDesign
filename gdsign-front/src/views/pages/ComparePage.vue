@@ -21,11 +21,7 @@
                   <th scope="col">商品1</th>
                   <th scope="col">商品2</th>
                   <th scope="col">关联度</th>
-                  <th
-                    id="tbModify"
-                    scope="auto"
-                    style="width: 170px; display: none"
-                  >
+                  <th id="tbModify" scope="auto" style="width: 170px; display: none">
                     操作
                   </th>
                 </tr>
@@ -177,23 +173,14 @@
         <div class="card d-flex justify-content-center col-4">
           <div class="card-body">
             <div class="card">
-              <div
-                style="
+              <div style="
                     height: 3rem;
                     padding: 0.5rem;
                     text-align: start;
                     display: flex;
                     justify-content: space-between;
-                  "
-                class="bg-dark text-white"
-              >
-                <b>商品1</b
-                ><input
-                  type="text"
-                  placeholder="商品编号/名称"
-                  class="form-control col-5 mr-3"
-                  style="height: 2rem"
-                />
+                  " class="bg-dark text-white">
+                <b>商品1</b><input type="text" placeholder="商品编号/名称" class="form-control col-5 mr-3" style="height: 2rem" />
               </div>
               <div class="card-body">
                 <h5 class="card-title">
@@ -203,23 +190,8 @@
               </div>
             </div>
             <div class="card">
-              <div
-                style="
-                    height: 3rem;
-                    padding: 0.5rem;
-                    text-align: start;
-                    display: flex;
-                    justify-content: space-between;
-                  "
-                class="bg-dark text-white"
-              >
-                <b>商品2</b
-                ><input
-                  type="text"
-                  placeholder="商品编号/名称"
-                  class="form-control col-5 mr-3"
-                  style="height: 2rem"
-                />
+              <div style="height: 3rem;padding: 0.5rem;text-align: start;display: flex;justify-content: space-between;" class="bg-dark text-white">
+                <b>商品2</b><input type="text" placeholder="商品编号/名称" class="form-control col-5 mr-3" style="height: 2rem" />
               </div>
               <div class="card-body">
                 <h5 class="card-title">
@@ -229,16 +201,13 @@
               </div>
             </div>
             <div class="card">
-              <div
-                style="
+              <div style="
                     height: 3rem;
                     padding: 0.5rem;
                     text-align: start;
                     display: flex;
                     justify-content: space-between;
-                  "
-                class="bg-dark text-white"
-              >
+                  " class="bg-dark text-white">
                 <b>关联度</b>
               </div>
               <div class="card-body">
@@ -247,31 +216,19 @@
               <div class="card-body">
                 <h4 class="text-muted">支持度</h4>
                 <div style="height:.75rem" class="bg-secondary">
-                  <div
-                    style="height:100%;width:90%"
-                    class="bg-success"
-                    title="91%"
-                  ></div>
+                  <div style="height:100%;width:90%" class="bg-success" title="91%"></div>
                 </div>
               </div>
               <div class="card-body">
                 <h4 class="text-muted">置信度</h4>
                 <div style="height:.75rem" class="bg-secondary">
-                  <div
-                    style="height:100%;width:98%"
-                    class="bg-success"
-                    title="98%"
-                  ></div>
+                  <div style="height:100%;width:98%" class="bg-success" title="98%"></div>
                 </div>
               </div>
               <div class="card-body">
                 <h4 class="text-muted">提升度</h4>
                 <div style="height:.75rem" class="bg-secondary">
-                  <div
-                    style="height:100%;width:60%"
-                    class="bg-warning"
-                    title="60%"
-                  ></div>
+                  <div style="height:100%;width:60%" class="bg-warning" title="60%"></div>
                 </div>
               </div>
             </div>

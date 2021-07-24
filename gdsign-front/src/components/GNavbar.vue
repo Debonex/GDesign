@@ -1,9 +1,5 @@
 <template>
-  <b-navbar
-    toggleable="lg"
-    type="dark"
-    class="bg-gradient-to-r from-gray-800 to-blue-600"
-  >
+  <b-navbar toggleable="lg" type="dark" class="bg-gradient-to-r from-gray-800 to-blue-600">
     <b-navbar-brand class="z-10" href="#">
       <i class="fa fa-area-chart mr-2" />Gdesign-
       <span class="text-blue-400 animate-pulse">rec</span>
