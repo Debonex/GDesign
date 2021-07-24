@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2021/7/14 17:02:28                           */
+/* Created on:     2021/7/25 1:32:54                            */
 /*==============================================================*/
 
 
@@ -28,6 +28,7 @@ create table commodity
    timelimit            varchar(20),
    region               varchar(20),
    value                double,
+   specification        varchar(255),
    primary key (id_commodity)
 );
 
