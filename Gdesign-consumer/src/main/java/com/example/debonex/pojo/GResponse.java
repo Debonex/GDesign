@@ -6,6 +6,12 @@ package com.example.debonex.pojo;
 public class GResponse {
 
     private String message;
+    private Object content;
+
+    public GResponse(String message, Object content) {
+        this.message = message;
+        this.content = content;
+    }
 
     public GResponse() {
     }
@@ -20,5 +26,13 @@ public class GResponse {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Object getContent() {
+        return content;
+    }
+
+    public void setContent(Object content) {
+        this.content = content;
     }
 }

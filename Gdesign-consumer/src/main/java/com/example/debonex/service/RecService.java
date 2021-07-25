@@ -23,8 +23,6 @@ public class RecService {
     public Object contentBase(Integer uid){
         ServiceInstance recService = serviceService.discover("rec-service");
         String url = recService.getUri().toString()+"/rec/contentBase";
-        Object callResult = new RestTemplate().getForObject(url,Object.class);
-        System.out.println(callResult);
-        return callResult;
+        return new RestTemplate().getForObject(url,Object.class);
     }
 }
