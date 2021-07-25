@@ -42,6 +42,7 @@ export default {
         .then((res) => {
           const msg = res.data.message;
           if (msg === constants.user.login.success) {
+            this.$cookies.set("uid", this.form.uid);
             this.$router.push("/home");
           }
           if (msg === constants.user.login.failed) {

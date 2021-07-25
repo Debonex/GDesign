@@ -17,7 +17,7 @@
     </div>
 
     <b-overlay :show="busy" class="w-full">
-      <b-table hover bordered :fields="fields" :items="content"></b-table>
+      <b-table responsive hover bordered :fields="fields" :items="content"></b-table>
     </b-overlay>
   </div>
 </template>

@@ -8,21 +8,31 @@
     <b-navbar-toggle class="z-10 sticky right-2" target="nav-collapse"></b-navbar-toggle>
     <b-collapse class="z-10" id="nav-collapse" is-nav>
       <b-navbar-nav class="ml-auto">
-        <b-nav-item-dropdown right>
+        <b-nav-item-dropdown right v-if="this.$cookies.get('uid')">
           <template v-slot:button-content>
             <b-avatar variant="dark"></b-avatar>
-            <em>User</em>
           </template>
-          <b-dropdown-item href="#">Profile</b-dropdown-item>
-          <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+          <b-dropdown-item href="#" @click="handleLogout">Logout</b-dropdown-item>
         </b-nav-item-dropdown>
+        <div v-else>
+          <router-link class="text-white mr-3" to="/login">Login</router-link>
+          <router-link class="text-white" to="/register">Register</router-link>
+        </div>
+
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    handleLogout: function () {
+      this.$cookies.remove("uid");
+      this.$router.push("/login");
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>
