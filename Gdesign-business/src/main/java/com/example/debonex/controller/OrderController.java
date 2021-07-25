@@ -14,8 +14,8 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
-    @RequestMapping("/selectOrderList")
-    public GResponse selectOrderList(@RequestParam int currentPage) {
+    @RequestMapping("/selectOrderPage")
+    public GResponse selectOrderPage(@RequestParam int currentPage) {
         return orderService.selectOrderPage(currentPage);
     }
 }
