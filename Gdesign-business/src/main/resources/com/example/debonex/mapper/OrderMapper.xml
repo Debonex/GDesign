@@ -2,9 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.debonex.mapper.OrderMapper">
     <select id="selectOrderPage" resultType="com.example.debonex.pojo.Order">
-        select * from orders limit ${(currentPage-1) * perPage},#{perPage}
+        select * from orders
+        <if test="uid > 0">
+            where uid = #{uid}
+        </if>
+        limit ${(currentPage-1) * perPage},#{perPage}
     </select>
-    <select id="selectOrderCount" resultType="Integer">
-        select count(*) from orders;
+    <select id="selectOrderCount" resultType="java.lang.Integer">
+        select count(*) from orders
+        <if test="uid > 0">
+            where uid = #{uid}
+        </if>
     </select>
+
 </mapper>

@@ -12,9 +12,9 @@ public class OrderService {
     @Autowired
     ServiceService serviceService;
 
-    public GResponse selectOrderPage(int currentPage) {
+    public GResponse selectOrderPage(int currentPage, int perPage, int uid) {
         ServiceInstance businessService = serviceService.discover("business-service");
         String url = businessService.getUri().toString() + "/order/selectOrderPage";
-        return new RestTemplate().getForObject(url + "?currentPage=" + currentPage, GResponse.class);
+        return new RestTemplate().getForObject(url + "?currentPage=" + currentPage + "&perPage=" + perPage + "&uid=" + uid, GResponse.class);
     }
 }

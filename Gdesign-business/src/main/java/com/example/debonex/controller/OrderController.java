@@ -15,7 +15,7 @@ public class OrderController {
     OrderService orderService;
 
     @RequestMapping("/selectOrderPage")
-    public GResponse selectOrderPage(@RequestParam int currentPage) {
-        return orderService.selectOrderPage(currentPage);
+    public GResponse selectOrderPage(@RequestParam int currentPage, @RequestParam int perPage, @RequestParam int uid) {
+        return orderService.selectOrderPage(currentPage, perPage, uid);
     }
 }

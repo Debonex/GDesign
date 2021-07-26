@@ -19,28 +19,16 @@ public class OrderService {
     /**
      * @param currentPage current page number
      * @param perPage     order count per page
-     * @return order list
+     * @param uid         user id
+     * @return order page info
      */
-    public GResponse selectOrderPage(int currentPage, int perPage) {
+    public GResponse selectOrderPage(int currentPage, int perPage, int uid) {
         try {
-            List<Order> list = orderMapper.selectOrderPage(currentPage, perPage);
-            OrderPage res = new OrderPage(list,currentPage,orderMapper.selectOrderCount());
+            List<Order> list = orderMapper.selectOrderPage(currentPage, perPage, uid);
+            OrderPage res = new OrderPage(list, currentPage, orderMapper.selectOrderCount(uid));
             return new GResponse(Constants.SUCCESS, res);
         } catch (Exception e) {
             e.printStackTrace();
-            return new GResponse(Constants.FAILED);
-        }
-
-    }
-
-    /**
-     * @param currentPage current page number
-     * @return order list
-     */
-    public GResponse selectOrderPage(int currentPage) {
-        try {
-            return this.selectOrderPage(currentPage, Constants.DEFAULT_ORDER_PER_PAGE);
-        } catch (Exception e) {
             return new GResponse(Constants.FAILED);
         }
     }
