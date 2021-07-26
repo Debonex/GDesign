@@ -7,10 +7,12 @@ const index = [
   },
   {
     path: "/login",
+    meta: { notRequireAuth: true },
     component: () => import("@/views/pages/Login.vue")
   },
   {
     path: "/register",
+    meta: { notRequireAuth: true },
     component: () => import("@/views/pages/Register.vue")
   }
 ];

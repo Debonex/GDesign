@@ -32,8 +32,7 @@ export default {
     };
   },
   methods: {
-    handleLogin: function (e) {
-      console.log(this.$api);
+    handleLogin: function () {
       this.$api.user
         .login({
           uid: this.form.uid,
