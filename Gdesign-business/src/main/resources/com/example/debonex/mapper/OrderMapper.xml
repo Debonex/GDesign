@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.debonex.mapper.OrderMapper">
-    <select id="selectOrderPage" resultType="com.example.debonex.pojo.Order">
+    <select id="selectOrderPage" resultMap="order">
         select * from orders
         <if test="uid > 0">
             where uid = #{uid}
@@ -14,5 +14,18 @@
             where uid = #{uid}
         </if>
     </select>
-
+    <resultMap id="order" type="com.example.debonex.pojo.Order">
+        <id property="idOrder" column="id_order"/>
+        <result property="idCommodity" column="id_commodity"/>
+        <result property="numCommodity" column="num_commodity"/>
+        <result property="amountOrder" column="amount_commodity"/>
+        <result property="idStore" column="id_store"/>
+        <result property="commission1" column="commission1"/>
+        <result property="idDistributor1" column="id_distributor1"/>
+        <result property="commission1" column="commission12"/>
+        <result property="idDistributor1" column="id_distributor2"/>
+        <result property="commission1" column="commission3"/>
+        <result property="idDistributor1" column="id_distributor3"/>
+        <result property="uid" column="uid"/>
+    </resultMap>
 </mapper>
