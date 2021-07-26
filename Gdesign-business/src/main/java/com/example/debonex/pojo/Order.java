@@ -17,8 +17,9 @@ public class Order {
     private double commission3;
     private int idDistributor3;
     private int uid;
+    private Commodity commodity;
 
-    public Order(String idOrder, int idCommodity, int numCommodity, double amountOrder, Integer idStore, double commission1, int idDistributor1, double commission2, int idDistributor2, double commission3, int idDistributor3, int uid) {
+    public Order(String idOrder, int idCommodity, int numCommodity, double amountOrder, Integer idStore, double commission1, int idDistributor1, double commission2, int idDistributor2, double commission3, int idDistributor3, int uid, Commodity commodity) {
         this.idOrder = idOrder;
         this.idCommodity = idCommodity;
         this.numCommodity = numCommodity;
@@ -31,6 +32,18 @@ public class Order {
         this.commission3 = commission3;
         this.idDistributor3 = idDistributor3;
         this.uid = uid;
+        this.commodity = commodity;
+    }
+
+    public Order() {
+    }
+
+    public Commodity getCommodity() {
+        return commodity;
+    }
+
+    public void setCommodity(Commodity commodity) {
+        this.commodity = commodity;
     }
 
     public String getIdOrder() {

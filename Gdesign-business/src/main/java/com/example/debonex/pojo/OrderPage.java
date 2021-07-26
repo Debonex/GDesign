@@ -17,6 +17,9 @@ public class OrderPage {
         this.totalRow = totalRow;
     }
 
+    public OrderPage() {
+    }
+
     public List<Order> getOrderList() {
         return orderList;
     }
