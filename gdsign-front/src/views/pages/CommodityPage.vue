@@ -11,6 +11,8 @@
       <b-table hover bordered :fields="fields" :items="content"></b-table>
     </b-overlay>
 
+    <b-pagination class="absolute bottom-0" v-model="currentPage" :total-rows="totalRow" :per-page="perPage" :disabled="busy" @change="selectCommodityPage" limit="7" v-show="totalRow>perPage" />
+
     <b-sidebar id="sidebar-commodity-add" width="max-content" body-class="bg-white w-screen md:w-screen-3/5 h-4 py-5 px-4 md:px-8" header-class="bg-gradient-to-r from-gray-800 to-blue-600 justify-between h-18" right shadow backdrop-variant="dark" backdrop>
       <template #header={hide}>
         <span class="text-3xl mr-2 text-white">商品信息</span>
@@ -39,7 +41,7 @@ export default {
     return {
       fields: [
         {
-          key: "id",
+          key: "idCommodity",
           label: "商品编号",
           sortable: true,
           tdClass: "font-bold text-center",
@@ -58,19 +60,51 @@ export default {
           label: "商品单价(元)",
           sortable: true,
         },
-        {
-          key: "resason",
-          label: "推荐理由",
-        },
       ],
       content: [],
       busy: false,
+      currentPage: 1,
+      perPage: 0,
+      totalRow: 0,
       commodity: {
         title: "",
         specification: "",
         value: 0.0,
       },
     };
+  },
+  created() {
+    this.selectCommodityPage(1);
+  },
+  methods: {
+    selectCommodityPage(page) {
+      this.busy = true;
+      this.$api.commodity
+        .selectPage({
+          currentPage: page,
+          perPage: 20,
+          uid: this.$cookies.get("uid"),
+        })
+        .then((res) => {
+          console.log(res.data);
+          this.currentPage = res.data.content.currentPage;
+          this.totalRow = res.data.content.totalRow;
+          this.content = [];
+          res.data.content.commodityList.forEach((commodity) => {
+            this.content.push({
+              idCommodity: commodity.idCommodity,
+              title: commodity.title,
+              specification: commodity.specification,
+              value: commodity.value,
+            });
+          });
+          this.busy = false;
+        })
+        .catch((err) => {
+          console.error(err);
+          this.busy = false;
+        });
+    },
   },
 };
 </script>
