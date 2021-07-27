@@ -18,7 +18,7 @@
         <id property="idOrder" column="id_order"/>
         <result property="idCommodity" column="id_commodity"/>
         <result property="numCommodity" column="num_commodity"/>
-        <result property="amountOrder" column="amount_commodity"/>
+        <result property="amountOrder" column="amount_order"/>
         <result property="idStore" column="id_store"/>
         <result property="commission1" column="commission1"/>
         <result property="idDistributor1" column="id_distributor1"/>
