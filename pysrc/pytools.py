@@ -23,3 +23,9 @@ class Pytools:
             return 0
         else:
             return int(float(item))
+
+    def convert_str_to_float(self,item):
+        if item == '':
+            return 0
+        else:
+            return float(item)

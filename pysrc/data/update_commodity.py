@@ -22,7 +22,7 @@ with open("../../datasets/commodity_with_value.csv", 'r', encoding='utf-8') as f
         commodities.append({
             "title": commodity[0],
             "specification": commodity[1],
-            "value": pt.conver_str_to_int(commodity[2])
+            "value": pt.convert_str_to_float(commodity[2])
         })
 
 cursor = db.cursor()
@@ -33,10 +33,8 @@ titles = list(map(lambda x: x[0], titles))
 
 for com in commodities:
     if com["title"] in titles:
-        print(com["specification"])
         sql = """update commodity set specification = '%s',value = '%f' where title = '%s'""" %\
             (com["specification"], com["value"], com["title"])
-        print(sql)
         db.cursor().execute(sql)
 
 db.commit()
