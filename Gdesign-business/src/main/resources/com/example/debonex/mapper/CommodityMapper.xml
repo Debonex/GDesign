@@ -4,6 +4,12 @@
     <select id="selectCommodity" resultMap="commodity">
         select * from commodity where id_commodity = #{idCommodity}
     </select>
+    <select id="selectCommodityList" resultMap="commodity">
+        select * from commodity limit ${(currentPage-1) * perPage},#{perPage}
+    </select>
+    <select id="selectCommodityCount" resultType="java.lang.Integer">
+        select count(*) from commodity
+    </select>
     <resultMap id="commodity" type="com.example.debonex.pojo.Commodity">
         <id property="idCommodity" column="id_commodity"/>
         <result property="title" column="title"/>

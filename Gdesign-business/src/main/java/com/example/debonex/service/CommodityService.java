@@ -1,7 +1,10 @@
 package com.example.debonex.service;
 
+import com.example.debonex.constants.Constants;
 import com.example.debonex.mapper.CommodityMapper;
 import com.example.debonex.pojo.Commodity;
+import com.example.debonex.pojo.CommodityPage;
+import com.example.debonex.pojo.GResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +34,22 @@ public class CommodityService {
      */
     public Commodity selectCommodity(int idCommodity) {
         return commodityMapper.selectCommodity(idCommodity);
+    }
+
+    /**
+     * @param currentPage current page number
+     * @param perPage     commodity count per page
+     * @return commodity info list
+     */
+    public GResponse selectCommodityPage(int currentPage, int perPage) {
+        try {
+            List<Commodity> list = commodityMapper.selectCommodityList(currentPage, perPage);
+            int totalRow = commodityMapper.selectCommodityCount();
+            return new GResponse(Constants.SUCCESS, new CommodityPage(list, currentPage, totalRow));
+        } catch (Exception e) {
+            return new GResponse(Constants.FAILED);
+        }
+
+
     }
 }
