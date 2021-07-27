@@ -9,7 +9,7 @@
     <b-overlay :show="busy" class="w-full">
       <b-table hover bordered :fields="fields" :items="content"></b-table>
     </b-overlay>
-    <b-pagination class="absolute bottom-0" v-model="currentPage" :total-rows="totalRow" :per-page="perPage" :disabled="busy" @change="selectOrderPage" limit="7" />
+    <b-pagination class="absolute bottom-0" v-model="currentPage" :total-rows="totalRow" :per-page="perPage" :disabled="busy" @change="selectOrderPage" limit="7" v-show="totalRow>perPage" />
   </div>
 </template>
 
@@ -64,6 +64,7 @@ export default {
           uid: this.$cookies.get("uid"),
         })
         .then((res) => {
+          console.log(res.data.content);
           this.currentPage = res.data.content.currentPage;
           this.totalRow = res.data.content.totalRow;
           this.content = [];
@@ -72,7 +73,7 @@ export default {
               idOrder: order.idOrder,
               title: order.commodity.title,
               numCommodity: order.numCommodity,
-              value: order.amountOrder / order.numCommodity,
+              value: order.commodity.value,
               amountOrder: order.amountOrder,
             });
           });
