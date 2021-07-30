@@ -1,5 +1,6 @@
 package com.example.debonex.service;
 
+import com.example.debonex.pojo.Commodity;
 import com.example.debonex.pojo.GResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -25,5 +26,15 @@ public class CommodityService {
         ServiceInstance businessService = serviceService.discover("business-service");
         String url = businessService.getUri() + "/commodity/selectCommodityPage";
         return new RestTemplate().getForObject(url + "?currentPage=" + currentPage + "&perPage=" + perPage, GResponse.class);
+    }
+
+    /**
+     * @param commodity commodity info
+     * @return response
+     */
+    public GResponse insertCommodity(Commodity commodity) {
+        ServiceInstance businessService = serviceService.discover("business-service");
+        String url = businessService.getUri() + "/commodity/insertCommodity";
+        return new RestTemplate().postForObject(url, commodity, GResponse.class);
     }
 }
