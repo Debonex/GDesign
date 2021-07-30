@@ -10,6 +10,9 @@
     <select id="selectCommodityCount" resultType="java.lang.Integer">
         select count(*) from commodity
     </select>
+    <insert id="insertCommodity" useGeneratedKeys="true" parameterType="com.example.debonex.pojo.Commodity">
+        insert into commodity(title,specification,entity,value,hire,timelimit,region) values (#{item.title},#{item.specification},#{item.entity},#{item.value},#{item.hire},#{item.timelimit},#{item.region})
+    </insert>
     <resultMap id="commodity" type="com.example.debonex.pojo.Commodity">
         <id property="idCommodity" column="id_commodity"/>
         <result property="title" column="title"/>

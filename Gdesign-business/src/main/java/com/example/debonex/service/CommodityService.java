@@ -49,7 +49,18 @@ public class CommodityService {
         } catch (Exception e) {
             return new GResponse(Constants.FAILED);
         }
+    }
 
-
+    /**
+     * @param commodity commodity info
+     * @return response
+     */
+    public GResponse insertCommodity(Commodity commodity) {
+        try {
+            commodityMapper.insertCommodity(commodity);
+            return new GResponse(Constants.SUCCESS);
+        } catch (Exception e) {
+            return new GResponse(Constants.FAILED);
+        }
     }
 }
