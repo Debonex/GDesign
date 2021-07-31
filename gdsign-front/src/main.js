@@ -23,12 +23,18 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 import less from "less";
 Vue.use(less);
 
+/**
+ * vuex
+ */
+import store from "./store/index";
+
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
   el: "#app",
   router,
+  store,
   components: {
     App
   },
