@@ -14,6 +14,12 @@
             where uid = #{uid}
         </if>
     </select>
+    <insert id="insertOrder" parameterType="com.example.debonex.pojo.Order">
+        insert into orders(id_order,id_commodity,num_commodity,amount_order,uid) values(#{item.idOrder},#{item.idCommodity},#{item.numCommodity},#{item.amountOrder},#{item.uid})
+    </insert>
+    <select id="selectOrderByIdPrefix" parameterType="java.lang.String" resultMap="order">
+        select * from orders where id_order like '${prefix}%' order by id_order desc
+    </select>
     <resultMap id="order" type="com.example.debonex.pojo.Order">
         <id property="idOrder" column="id_order"/>
         <result property="idCommodity" column="id_commodity"/>

@@ -15,11 +15,24 @@ public interface OrderMapper {
      * @param uid         user id
      * @return order list
      */
-    public List<Order> selectOrderPage(@Param("currentPage") int currentPage,@Param("perPage") int perPage,@Param("uid") int uid);
+    public List<Order> selectOrderPage(@Param("currentPage") int currentPage, @Param("perPage") int perPage, @Param("uid") int uid);
 
     /**
      * @param uid user id
      * @return order list
      */
     public int selectOrderCount(@Param("uid") int uid);
+
+    /**
+     * insert new order line
+     *
+     * @param order order info
+     */
+    public void insertOrder(@Param("item") Order order);
+
+    /**
+     * @param prefix order id prefix
+     * @return order info
+     */
+    public List<Order> selectOrderByIdPrefix(@Param("prefix") String prefix);
 }

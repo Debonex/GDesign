@@ -8,7 +8,6 @@ import com.example.debonex.pojo.OrderPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -38,5 +37,38 @@ public class OrderService {
             e.printStackTrace();
             return new GResponse(Constants.FAILED);
         }
+    }
+
+    /**
+     * @param idCommodity  commodity id
+     * @param numCommodity commodity num
+     * @param date         date info
+     * @return response
+     */
+    public GResponse insertOrder(int idCommodity, int numCommodity, String date, int uid) {
+        try {
+            String prefix = "S" + date.replaceAll("-", "");
+            List<Order> list = orderMapper.selectOrderByIdPrefix(prefix);
+            String newId = prefix;
+            if (list.size() == 0) {
+                newId = prefix + "100000";
+            } else {
+                String suffixMax = list.get(0).getIdOrder().substring(9);
+                newId = prefix + String.valueOf(Integer.parseInt(suffixMax) + 1);
+            }
+            Order order = new Order();
+            order.setIdOrder(newId);
+            order.setIdCommodity(idCommodity);
+            order.setNumCommodity(numCommodity);
+            double valueCommodity = commodityService.selectCommodity(idCommodity).getValue();
+            order.setAmountOrder(numCommodity * valueCommodity);
+            order.setUid(uid);
+            orderMapper.insertOrder(order);
+            return new GResponse(Constants.SUCCESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new GResponse(Constants.FAILED);
+        }
+
     }
 }
