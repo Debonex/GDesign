@@ -32,8 +32,8 @@
       <label class="text-xl font-bold mt-4 md:mt-8" label-for="input-specification">商品规格</label>
       <b-form-input id="input-specification" v-model="commodity.specification" placeholder="输入商品规格" required></b-form-input>
 
-      <label class="text-xl font-bold mt-4 md:mt-8" label-for="input-title">商品价格（元）</label>
-      <b-form-input id="input-value" v-model="commodity.value" type="number" placeholder="输入商品价格" required></b-form-input>
+      <label class="text-xl font-bold mt-4 md:mt-8" label-for="input-value">商品单价（元）</label>
+      <b-form-input id="input-value" v-model="commodity.value" type="number" placeholder="输入商品单价" required></b-form-input>
 
       <label class="text-xl font-bold mt-4 md:mt-8" for="select-entity">商品类型</label>
       <b-form-select id="select-entity" v-model="commodity.entity" :options="entityOptions">
