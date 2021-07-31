@@ -63,4 +63,16 @@ public class CommodityService {
             return new GResponse(Constants.FAILED);
         }
     }
+
+    /**
+     * @param keyword search keyword
+     * @return commodity info list
+     */
+    public GResponse searchCommodityList(String keyword) {
+        try {
+            return new GResponse(Constants.SUCCESS, commodityMapper.searchCommodityList(keyword));
+        } catch (Exception e) {
+            return new GResponse(Constants.FAILED);
+        }
+    }
 }

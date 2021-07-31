@@ -29,4 +29,9 @@ public class CommodityController {
     public GResponse insertCommodity(@RequestBody Commodity commodity) {
         return commodityService.insertCommodity(commodity);
     }
+
+    @RequestMapping("/searchCommodityList")
+    public GResponse searchCommodityList(@RequestParam String keyword) {
+        return commodityService.searchCommodityList(keyword);
+    }
 }

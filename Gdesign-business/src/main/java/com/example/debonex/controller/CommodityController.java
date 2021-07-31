@@ -48,4 +48,9 @@ public class CommodityController {
             return new GResponse(Constants.FAILED);
         }
     }
+
+    @RequestMapping("/searchCommodityList")
+    public GResponse searchCommodityList(@RequestParam String keyword) {
+        return commodityService.searchCommodityList(keyword);
+    }
 }
