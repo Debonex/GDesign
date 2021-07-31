@@ -1,12 +1,17 @@
 import json
 from abc import ABC
+import requests
 
 import tornado.web
-
 from apps.algorithms.contentBase.ContentBase import ContentBase
-import apps.requests.data_requests as dr
+from utils.consul_client import ConsulClient
+from conf.config import getConfig
 
 cb = ContentBase()
+conf = getConfig()
+consul = ConsulClient(conf.consul_address, conf.consul_port)
+
+businessService = consul.getService('business-service')
 
 
 class RecHandler(tornado.web.RequestHandler, ABC):
@@ -15,5 +20,6 @@ class RecHandler(tornado.web.RequestHandler, ABC):
         idList = []
         for item in res:
             idList.append(item[0])
-        commodityList = dr.getCommodityList(idList)
-        self.finish({"data": json.loads(commodityList.text)})
+        url = 'http://' + businessService[0] + ':' + str(businessService[1]) + "/commodity/selectCommodityList"
+        commodityList = requests.post(url, json=idList)
+        self.finish(json.loads(commodityList.text))
