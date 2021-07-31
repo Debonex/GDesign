@@ -28,6 +28,12 @@ Vue.use(less);
  */
 import store from "./store/index";
 
+/**
+ * plugins
+ */
+import gnotify from "./plugins/gnotify";
+Vue.use(gnotify);
+
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */

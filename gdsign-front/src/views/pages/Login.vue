@@ -48,27 +48,20 @@ export default {
           const msg = res.data.message;
           if (msg === constants.user.login.success) {
             this.$cookies.set("uid", this.form.uid);
-            this.$store.commit("notify", ["登录成功", "success"]);
             timer = setTimeout(() => {
               this.$router.push("/home");
-              this.$store.commit("removeNotify");
               this.busy = false;
-            }, 2000);
+            }, 1500);
+            this.notify("登录成功!", "success", 1500);
           }
           if (msg === constants.user.login.failed) {
-            this.$store.commit("notify", ["登录失败", "danger"]);
-            timer = setTimeout(() => {
-              this.$store.commit("removeNotify");
-            }, 5000);
+            this.notify("登录失败", "danger", 3000);
             this.busy = false;
           }
         })
         .catch((err) => {
-          this.$store.commit("notify", ["登录失败", "danger"]);
-          timer = setTimeout(() => {
-            this.$store.commit("removeNotify");
-          }, 5000);
           console.error(err);
+          this.notify("登录失败", "danger", 3000);
           this.busy = false;
         });
     },

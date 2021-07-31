@@ -154,10 +154,7 @@ export default {
         .then((res) => {
           console.log(res);
           if (res.data.message === constants.success) {
-            this.$store.commit("notify", ["新增订单成功!", "success"]);
-            timer = setTimeout(() => {
-              this.$store.commit("removeNotify");
-            }, 3000);
+            this.notify("新增订单成功", "success", 3000);
             this.order = {
               idCommodity: "",
               numCommodity: 0,
@@ -186,20 +183,14 @@ export default {
                 this.busy = false;
               });
           } else {
-            this.$store.commit("notify", ["新增订单失败", "danger"]);
-            timer = setTimeout(() => {
-              this.$store.commit("removeNotify");
-            }, 3000);
+            this.notify("新增订单失败", "danger", 3000);
             this.busy = false;
           }
         })
         .catch((err) => {
           console.error(err);
+          this.notify("新增订单失败", "danger", 3000);
           this.busy = false;
-          this.$store.commit("notify", ["新增订单失败", "danger"]);
-          timer = setTimeout(() => {
-            this.$store.commit("removeNotify");
-          }, 3000);
         });
     },
   },

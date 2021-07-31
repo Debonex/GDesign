@@ -52,26 +52,19 @@ export default {
         .then((res) => {
           const msg = res.data.message;
           if (msg === constants.user.register.success) {
-            this.$store.commit("notify", ["注册成功", "success"]);
+            this.notify("注册成功!", "success", 3000);
             timer = setTimeout(() => {
-              this.$store.commit("removeNotify");
               this.$router.push("/login");
               this.busy = false;
             }, 1500);
           } else {
-            this.$store.commit("notify", ["注册失败", "danger"]);
-            timer = setTimeout(() => {
-              this.$store.commit("removeNotify");
-            }, 5000);
+            this.notify("注册失败", "danger", 3000);
             this.busy = false;
           }
         })
         .catch((err) => {
           console.error(err);
-          this.$store.commit("notify", ["注册失败", "danger"]);
-          timer = setTimeout(() => {
-            this.$store.commit("removeNotify");
-          }, 5000);
+          this.notify("注册失败", "danger", 3000);
           this.busy = false;
         });
     },

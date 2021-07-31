@@ -129,10 +129,7 @@ export default {
         .addCommodity(this.commodity)
         .then((res) => {
           if (res.data.message === constants.success) {
-            this.$store.commit("notify", ["上传商品成功!", "success"]);
-            timer = setTimeout(() => {
-              this.$store.commit("removeNotify");
-            }, 3000);
+            this.notify("上传商品成功!", "success", 3000);
             this.commodity = {
               title: "",
               specification: "",
@@ -141,18 +138,12 @@ export default {
               timelimit: "",
             };
           } else {
-            this.$store.commit("notify", ["上传商品失败", "danger"]);
-            timer = setTimeout(() => {
-              this.$store.commit("removeNotify");
-            }, 3000);
+            this.notify("上传商品失败", "danger", 3000);
           }
         })
         .catch((err) => {
-          this.$store.commit("notify", ["上传商品失败", "danger"]);
-          timer = setTimeout(() => {
-            this.$store.commit("removeNotify");
-          }, 3000);
           console.error(err);
+          this.notify("上传商品失败", "danger", 3000);
         });
     },
   },
