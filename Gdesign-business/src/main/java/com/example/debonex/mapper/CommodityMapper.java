@@ -30,4 +30,11 @@ public interface CommodityMapper {
      * @return commodity count
      */
     public int selectCommodityCount();
+
+    /**
+     *
+     * @param commodity commodity info
+     * @return primary key
+     */
+    public int insertCommodity(@Param("item")Commodity commodity);
 }

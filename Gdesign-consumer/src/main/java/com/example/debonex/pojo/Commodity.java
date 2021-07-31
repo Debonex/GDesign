@@ -1,20 +1,21 @@
 package com.example.debonex.pojo;
 
 /**
- * @author Debonex
+ * @author Debonet
+ * @date 2021年7月27日
  */
 public class Commodity {
-    private Integer id;
+    private int idCommodity;
     private String title;
-    private Integer entity;
+    private int entity;
     private String hire;
     private String timelimit;
     private String region;
-    private Double value;
+    private double value;
     private String specification;
 
-    public Commodity(Integer id, String title, Integer entity, String hire, String timelimit, String region, Double value, String specification) {
-        this.id = id;
+    public Commodity(int idCommodity, String title, int entity, String hire, String timelimit, String region, double value, String specification) {
+        this.idCommodity = idCommodity;
         this.title = title;
         this.entity = entity;
         this.hire = hire;
@@ -24,28 +25,15 @@ public class Commodity {
         this.specification = specification;
     }
 
-    public Double getValue() {
-        return value;
+    public Commodity() {
     }
 
-    public void setValue(Double value) {
-        this.value = value;
+    public int getIdCommodity() {
+        return idCommodity;
     }
 
-    public String getSpecification() {
-        return specification;
-    }
-
-    public void setSpecification(String specification) {
-        this.specification = specification;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdCommodity(int idCommodity) {
+        this.idCommodity = idCommodity;
     }
 
     public String getTitle() {
@@ -56,11 +44,11 @@ public class Commodity {
         this.title = title;
     }
 
-    public Integer getEntity() {
+    public int getEntity() {
         return entity;
     }
 
-    public void setEntity(Integer entity) {
+    public void setEntity(int entity) {
         this.entity = entity;
     }
 
@@ -86,5 +74,21 @@ public class Commodity {
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    public String getSpecification() {
+        return specification;
+    }
+
+    public void setSpecification(String specification) {
+        this.specification = specification;
     }
 }

@@ -18,4 +18,9 @@ public class OrderController {
     public GResponse selectOrderPage(@RequestParam int currentPage, @RequestParam int perPage, @RequestParam int uid) {
         return orderService.selectOrderPage(currentPage, perPage, uid);
     }
+
+    @RequestMapping("/insertOrder")
+    public GResponse insertOrder(@RequestParam int idCommodity, @RequestParam int numCommodity,@RequestParam String date, @RequestParam int uid) {
+        return orderService.insertOrder(idCommodity, numCommodity, date, uid);
+    }
 }

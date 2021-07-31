@@ -1,5 +1,6 @@
 <template>
   <div class="flex flex-column items-center">
+    <g-alert class="absolute top-4 self-center z-30" />
     <div class="flex pl-2 md:pl-12 py-3 bg-gradient-to-r from-gray-800 to-blue-600 text-3xl text-white w-full">
       <p>商品上传</p>
       <b-button class="ml-10" :disabled="busy" variant="success" v-b-toggle.sidebar-commodity-add>
@@ -13,14 +14,14 @@
 
     <b-pagination class="absolute bottom-0" v-model="currentPage" :total-rows="totalRow" :per-page="perPage" :disabled="busy" @change="selectCommodityPage" limit="7" v-show="totalRow>perPage" />
 
-    <b-sidebar id="sidebar-commodity-add" width="max-content" body-class="bg-white w-screen md:w-screen-3/5 h-4 py-5 px-4 md:px-8" header-class="bg-gradient-to-r from-gray-800 to-blue-600 justify-between h-18" right shadow backdrop-variant="dark" backdrop>
+    <b-sidebar class="z-20" id="sidebar-commodity-add" width="max-content" body-class="bg-white w-screen md:w-screen-3/5 h-4 py-5 px-4 md:px-8" header-class="bg-gradient-to-r from-gray-800 to-blue-600 justify-between h-18" right shadow backdrop-variant="dark" backdrop>
       <template #header={hide}>
         <span class="text-3xl mr-2 text-white">商品信息</span>
         <button><i class="fa fa-remove text-white" @click="hide" /></button>
       </template>
       <template #footer="{ hide }">
         <div class="d-flex text-light align-items-center px-3 py-2">
-          <b-button class="mr-3" variant="success" size="md">确认</b-button>
+          <b-button class="mr-3" variant="success" size="md" @click="handleAddCommodity" :disabled="busy">确认</b-button>
           <b-button variant="outline-primary" size="md" @click="hide">取消</b-button>
         </div>
       </template>
@@ -28,15 +29,28 @@
       <label class="text-xl font-bold" label-for="input-title">商品标题</label>
       <b-form-input id="input-title" v-model="commodity.title" placeholder="输入商品标题" required></b-form-input>
 
-      <label class="text-xl font-bold mt-4 md:mt-8" label-for="input-title">商品价格</label>
-      <b-form-input id="input-value" v-model="commodity.value" type="number" placeholder="输入商品价格" required></b-form-input>
+      <label class="text-xl font-bold mt-4 md:mt-8" label-for="input-specification">商品规格</label>
+      <b-form-input id="input-specification" v-model="commodity.specification" placeholder="输入商品规格" required></b-form-input>
+
+      <label class="text-xl font-bold mt-4 md:mt-8" label-for="input-value">商品单价（元）</label>
+      <b-form-input id="input-value" v-model="commodity.value" type="number" placeholder="输入商品单价" required></b-form-input>
+
+      <label class="text-xl font-bold mt-4 md:mt-8" for="select-entity">商品类型</label>
+      <b-form-select id="select-entity" v-model="commodity.entity" :options="entityOptions">
+      </b-form-select>
 
     </b-sidebar>
   </div>
 </template>
 
 <script>
+import GAlert from "@/components/GAlert.vue";
+import constants from "@/constants/constants.js";
+let timer = null;
 export default {
+  components: {
+    GAlert,
+  },
   data() {
     return {
       fields: [
@@ -66,10 +80,16 @@ export default {
       currentPage: 1,
       perPage: 0,
       totalRow: 0,
+      entityOptions: [
+        { value: 0, text: "虚拟商品" },
+        { value: 1, text: "实体商品" },
+      ],
       commodity: {
         title: "",
         specification: "",
         value: 0.0,
+        entity: 0,
+        timelimit: "",
       },
     };
   },
@@ -86,7 +106,6 @@ export default {
           uid: this.$cookies.get("uid"),
         })
         .then((res) => {
-          console.log(res.data);
           this.currentPage = res.data.content.currentPage;
           this.totalRow = res.data.content.totalRow;
           this.content = [];
@@ -105,6 +124,40 @@ export default {
           this.busy = false;
         });
     },
+    handleAddCommodity() {
+      this.$api.commodity
+        .addCommodity(this.commodity)
+        .then((res) => {
+          if (res.data.message === constants.success) {
+            this.$store.commit("notify", ["上传商品成功!", "success"]);
+            timer = setTimeout(() => {
+              this.$store.commit("removeNotify");
+            }, 3000);
+            this.commodity = {
+              title: "",
+              specification: "",
+              value: 0.0,
+              entity: 0,
+              timelimit: "",
+            };
+          } else {
+            this.$store.commit("notify", ["上传商品失败", "danger"]);
+            timer = setTimeout(() => {
+              this.$store.commit("removeNotify");
+            }, 3000);
+          }
+        })
+        .catch((err) => {
+          this.$store.commit("notify", ["上传商品失败", "danger"]);
+          timer = setTimeout(() => {
+            this.$store.commit("removeNotify");
+          }, 3000);
+          console.error(err);
+        });
+    },
+  },
+  beforeDestroy() {
+    clearTimeout(timer);
   },
 };
 </script>

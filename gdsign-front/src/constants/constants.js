@@ -1,5 +1,7 @@
 import user from "./user";
 
 export default {
-  user
+  user,
+  success: "success",
+  failed: "failed"
 };

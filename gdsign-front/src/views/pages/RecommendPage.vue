@@ -28,7 +28,7 @@ export default {
     return {
       fields: [
         {
-          key: "id",
+          key: "idCommodity",
           label: "商品编号",
           sortable: true,
           tdClass: "font-bold text-center",
@@ -61,16 +61,15 @@ export default {
       .contentBase()
       .then((res) => {
         this.content = [];
-        res.data.data.forEach((item) => {
+        res.data.content.forEach((item) => {
           this.content.push({
-            id: item.id,
+            idCommodity: item.idCommodity,
             title: item.title,
             value: item.value,
             specification: item.specification,
             reason: "todo",
           });
         });
-        console.log(this.content);
       })
       .catch((err) => {
         console.log(err);
