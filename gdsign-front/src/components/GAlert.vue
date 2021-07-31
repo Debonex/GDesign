@@ -1,11 +1,17 @@
 <template>
-  <b-alert :show="this.$store.state.notify.show" :variant="this.$store.state.notify.type" dismissible fade>
+  <b-alert :show="this.$store.state.notify.show" :variant="type" dismissible fade>
     {{this.$store.state.notify.msg}}
   </b-alert>
 </template>
 
 <script>
 export default {
-  watch: {},
+  computed: {
+    type: {
+      get() {
+        return this.$store.state.notify.type;
+      },
+    },
+  },
 };
 </script>

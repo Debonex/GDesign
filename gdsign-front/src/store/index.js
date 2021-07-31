@@ -13,7 +13,7 @@ export default function() {
       }
     },
     mutations: {
-      notify(state, msg, type) {
+      notify(state, [msg, type]) {
         state.notify.show = true;
         state.notify.msg = msg;
         state.notify.type = type;

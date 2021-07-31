@@ -1,5 +1,6 @@
 <template>
   <index-layout>
+    <g-alert class="absolute top-4 self-center z-30" />
     <b-form class="w-5/6 sm:w-96 bg-gray-200 p-12 rounded-lg z-10">
       <div class="text-2xl text-center">注册</div>
       <b-form-group class="mt-10" label="用户ID">
@@ -14,7 +15,8 @@
         <b-form-input v-model="form.password2" required type="password" placeholder="请确认密码">
         </b-form-input>
       </b-form-group>
-      <b-button class="mt-6 w-full" @click="handleRegister" variant="primary">注册</b-button>
+      <router-link class="block mt-6 text-right text-primary" to="/login">已有账号，前往登录</router-link>
+      <b-button class="mt-6 w-full" @click="handleRegister" variant="primary" :disabled="busy">注册</b-button>
     </b-form>
   </index-layout>
 </template>
@@ -22,9 +24,12 @@
 <script>
 import indexLayout from "@/views/layout/IndexLayout.vue";
 import constants from "@/constants/constants.js";
+import GAlert from "@/components/GAlert.vue";
+let timer = null;
 export default {
   components: {
     indexLayout,
+    GAlert,
   },
   data() {
     return {
@@ -33,10 +38,12 @@ export default {
         password: "",
         password2: "",
       },
+      busy: false,
     };
   },
   methods: {
     handleRegister: function (e) {
+      this.busy = true;
       this.$api.user
         .register({
           uid: this.form.uid,
@@ -45,12 +52,27 @@ export default {
         .then((res) => {
           const msg = res.data.message;
           if (msg === constants.user.register.success) {
-            this.$router.push("/login");
+            this.$store.commit("notify", ["注册成功", "success"]);
+            timer = setTimeout(() => {
+              this.$store.commit("removeNotify");
+              this.$router.push("/login");
+              this.busy = false;
+            }, 1500);
+          } else {
+            this.$store.commit("notify", ["注册失败", "danger"]);
+            timer = setTimeout(() => {
+              this.$store.commit("removeNotify");
+            }, 5000);
+            this.busy = false;
           }
-          console.log(res);
         })
         .catch((err) => {
           console.error(err);
+          this.$store.commit("notify", ["注册失败", "danger"]);
+          timer = setTimeout(() => {
+            this.$store.commit("removeNotify");
+          }, 5000);
+          this.busy = false;
         });
     },
   },

@@ -41,6 +41,7 @@
 
 <script>
 import GAlert from "@/components/GAlert.vue";
+let timer = null;
 export default {
   components: {
     GAlert,
@@ -113,11 +114,14 @@ export default {
         });
     },
     handleAddCommodity() {
-      this.$store.commit("notify", "上传商品成功!", "success");
-      setTimeout(() => {
+      this.$store.commit("notify", ["上传商品成功!", "success"]);
+      timer = setTimeout(() => {
         this.$store.commit("removeNotify");
       }, 3000);
     },
+  },
+  beforeDestroy() {
+    clearTimeout(timer);
   },
 };
 </script>
