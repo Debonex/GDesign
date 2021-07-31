@@ -21,7 +21,7 @@
       </template>
       <template #footer="{ hide }">
         <div class="d-flex text-light align-items-center px-3 py-2">
-          <b-button class="mr-3" variant="success" size="md" @click="handleAddCommodity">确认</b-button>
+          <b-button class="mr-3" variant="success" size="md" @click="handleAddCommodity" :disabled="busy">确认</b-button>
           <b-button variant="outline-primary" size="md" @click="hide">取消</b-button>
         </div>
       </template>
@@ -32,8 +32,12 @@
       <label class="text-xl font-bold mt-4 md:mt-8" label-for="input-specification">商品规格</label>
       <b-form-input id="input-specification" v-model="commodity.specification" placeholder="输入商品规格" required></b-form-input>
 
-      <label class="text-xl font-bold mt-4 md:mt-8" label-for="input-title">商品价格</label>
+      <label class="text-xl font-bold mt-4 md:mt-8" label-for="input-title">商品价格（元）</label>
       <b-form-input id="input-value" v-model="commodity.value" type="number" placeholder="输入商品价格" required></b-form-input>
+
+      <label class="text-xl font-bold mt-4 md:mt-8" for="select-entity">商品类型</label>
+      <b-form-select id="select-entity" v-model="commodity.entity" :options="entityOptions">
+      </b-form-select>
 
     </b-sidebar>
   </div>
@@ -41,6 +45,7 @@
 
 <script>
 import GAlert from "@/components/GAlert.vue";
+import constants from "@/constants/constants.js";
 let timer = null;
 export default {
   components: {
@@ -75,10 +80,16 @@ export default {
       currentPage: 1,
       perPage: 0,
       totalRow: 0,
+      entityOptions: [
+        { value: 0, text: "虚拟商品" },
+        { value: 1, text: "实体商品" },
+      ],
       commodity: {
         title: "",
         specification: "",
         value: 0.0,
+        entity: 0,
+        timelimit: "",
       },
     };
   },
@@ -114,10 +125,35 @@ export default {
         });
     },
     handleAddCommodity() {
-      this.$store.commit("notify", ["上传商品成功!", "success"]);
-      timer = setTimeout(() => {
-        this.$store.commit("removeNotify");
-      }, 3000);
+      this.$api.commodity
+        .addCommodity(this.commodity)
+        .then((res) => {
+          if (res.data.message === constants.success) {
+            this.$store.commit("notify", ["上传商品成功!", "success"]);
+            timer = setTimeout(() => {
+              this.$store.commit("removeNotify");
+            }, 3000);
+            this.commodity = {
+              title: "",
+              specification: "",
+              value: 0.0,
+              entity: 0,
+              timelimit: "",
+            };
+          } else {
+            this.$store.commit("notify", ["上传商品失败", "danger"]);
+            timer = setTimeout(() => {
+              this.$store.commit("removeNotify");
+            }, 3000);
+          }
+        })
+        .catch((err) => {
+          this.$store.commit("notify", ["上传商品失败", "danger"]);
+          timer = setTimeout(() => {
+            this.$store.commit("removeNotify");
+          }, 3000);
+          console.error(err);
+        });
     },
   },
   beforeDestroy() {
