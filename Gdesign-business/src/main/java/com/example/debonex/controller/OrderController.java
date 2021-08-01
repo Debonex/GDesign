@@ -20,7 +20,12 @@ public class OrderController {
     }
 
     @RequestMapping("/insertOrder")
-    public GResponse insertOrder(@RequestParam int idCommodity, @RequestParam int numCommodity,@RequestParam String date, @RequestParam int uid) {
+    public GResponse insertOrder(@RequestParam int idCommodity, @RequestParam int numCommodity, @RequestParam String date, @RequestParam int uid) {
         return orderService.insertOrder(idCommodity, numCommodity, date, uid);
+    }
+
+    @RequestMapping("/deleteOrder")
+    public GResponse deleteOrder(@RequestParam String idOrder) {
+        return orderService.deleteOrder(idOrder);
     }
 }

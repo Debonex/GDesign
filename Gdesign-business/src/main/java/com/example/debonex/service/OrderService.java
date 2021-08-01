@@ -69,6 +69,21 @@ public class OrderService {
             e.printStackTrace();
             return new GResponse(Constants.FAILED);
         }
+    }
 
+    /**
+     * delete order by order id
+     *
+     * @param idOrder order id
+     * @return response
+     */
+    public GResponse deleteOrder(String idOrder) {
+        try {
+            orderMapper.deleteOrder(idOrder);
+            return new GResponse(Constants.SUCCESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new GResponse(Constants.FAILED);
+        }
     }
 }

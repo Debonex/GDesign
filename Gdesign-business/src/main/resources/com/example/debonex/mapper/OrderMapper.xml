@@ -20,6 +20,9 @@
     <select id="selectOrderByIdPrefix" parameterType="java.lang.String" resultMap="order">
         select * from orders where id_order like '${prefix}%' order by id_order desc
     </select>
+    <delete id="deleteOrder" parameterType="java.lang.String">
+        delete from orders where id_order = #{idOrder}
+    </delete>
     <resultMap id="order" type="com.example.debonex.pojo.Order">
         <id property="idOrder" column="id_order"/>
         <result property="idCommodity" column="id_commodity"/>

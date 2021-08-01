@@ -35,4 +35,9 @@ public interface OrderMapper {
      * @return order info
      */
     public List<Order> selectOrderByIdPrefix(@Param("prefix") String prefix);
+
+    /**
+     * @param idOrder order id
+     */
+    public void deleteOrder(@Param("idOrder") String idOrder);
 }
