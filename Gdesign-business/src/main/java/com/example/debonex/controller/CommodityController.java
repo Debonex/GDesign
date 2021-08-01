@@ -45,7 +45,7 @@ public class CommodityController {
             List<Integer> list = Arrays.stream(commodityIdList).boxed().collect(Collectors.toList());
             return new GResponse(Constants.SUCCESS, commodityService.selectCommodityList(list));
         } catch (Exception e) {
-            return new GResponse(Constants.FAILED);
+            return new GResponse(Constants.FAILED,"服务器错误，获取商品列表失败");
         }
     }
 
@@ -60,7 +60,7 @@ public class CommodityController {
             Commodity commodity = commodityService.selectCommodity(idCommodity);
             return new GResponse(Constants.SUCCESS, commodity);
         } catch (Exception e) {
-            return new GResponse(Constants.FAILED);
+            return new GResponse(Constants.FAILED,"服务器错误，获取商品信息失败");
         }
     }
 }

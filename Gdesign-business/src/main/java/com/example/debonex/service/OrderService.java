@@ -35,7 +35,7 @@ public class OrderService {
             return new GResponse(Constants.SUCCESS, res);
         } catch (Exception e) {
             e.printStackTrace();
-            return new GResponse(Constants.FAILED);
+            return new GResponse(Constants.FAILED,"服务器错误，获取订单列表失败");
         }
     }
 
@@ -67,7 +67,7 @@ public class OrderService {
             return new GResponse(Constants.SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
-            return new GResponse(Constants.FAILED);
+            return new GResponse(Constants.FAILED,"服务器错误，新增订单失败");
         }
     }
 
@@ -83,7 +83,7 @@ public class OrderService {
             return new GResponse(Constants.SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
-            return new GResponse(Constants.FAILED);
+            return new GResponse(Constants.FAILED,"服务器错误，删除订单失败");
         }
     }
 }
