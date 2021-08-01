@@ -47,4 +47,14 @@ public class CommodityService {
         String url = businessService.getUri() + "/commodity/searchCommodityList";
         return new RestTemplate().getForObject(url + "?keyword=" + keyword, GResponse.class);
     }
+
+    /**
+     * @param idCommodity commodity id
+     * @return commodity info
+     */
+    public GResponse selectCommodity(int idCommodity) {
+        ServiceInstance businessService = serviceService.discover("business-service");
+        String url = businessService.getUri() + "/commodity/selectCommodity";
+        return new RestTemplate().getForObject(url + "?idCommodity=" + idCommodity, GResponse.class);
+    }
 }

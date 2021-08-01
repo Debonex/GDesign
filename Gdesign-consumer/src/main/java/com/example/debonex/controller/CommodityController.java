@@ -34,4 +34,9 @@ public class CommodityController {
     public GResponse searchCommodityList(@RequestParam String keyword) {
         return commodityService.searchCommodityList(keyword);
     }
+
+    @RequestMapping("/selectCommodity")
+    public GResponse selectCommodity(@RequestParam int idCommodity) {
+        return commodityService.selectCommodity(idCommodity);
+    }
 }

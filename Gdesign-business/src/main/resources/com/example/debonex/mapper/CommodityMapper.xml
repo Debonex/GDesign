@@ -14,7 +14,7 @@
         insert into commodity(title,specification,entity,value,hire,timelimit,region) values (#{item.title},#{item.specification},#{item.entity},#{item.value},#{item.hire},#{item.timelimit},#{item.region})
     </insert>
     <select id="searchCommodityList" resultMap="commodity">
-        select * from commodity where id_commodity = #{keyword} or title like '%${keyword}%'
+        select * from commodity where id_commodity = #{keyword} or title like '%${keyword}%' limit 0,8
     </select>
     <resultMap id="commodity" type="com.example.debonex.pojo.Commodity">
         <id property="idCommodity" column="id_commodity"/>

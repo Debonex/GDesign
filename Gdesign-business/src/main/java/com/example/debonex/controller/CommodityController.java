@@ -53,4 +53,14 @@ public class CommodityController {
     public GResponse searchCommodityList(@RequestParam String keyword) {
         return commodityService.searchCommodityList(keyword);
     }
+
+    @RequestMapping("/selectCommodity")
+    public GResponse selectCommodity(@RequestParam int idCommodity) {
+        try {
+            Commodity commodity = commodityService.selectCommodity(idCommodity);
+            return new GResponse(Constants.SUCCESS, commodity);
+        } catch (Exception e) {
+            return new GResponse(Constants.FAILED);
+        }
+    }
 }
