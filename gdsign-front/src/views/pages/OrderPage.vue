@@ -16,6 +16,14 @@
         <template #cell(value)="data">
           {{ data.value.toFixed(2) }}
         </template>
+        <template #cell(actions)="row">
+          <b-button size="sm" class="mr-2" variant="primary" :disabled="busy">
+            修改
+          </b-button>
+          <b-button size="sm" class="mr-2" variant="danger" :disabled="busy" @click="handleDelete(row.item)">
+            删除
+          </b-button>
+        </template>
       </b-table>
     </b-overlay>
 
@@ -60,7 +68,6 @@
 <script>
 import GAlert from "@/components/GAlert.vue";
 import constants from "@/constants/constants.js";
-let timer = null;
 export default {
   components: {
     GAlert,
@@ -93,12 +100,16 @@ export default {
           label: "订单金额(元)",
           sortable: true,
         },
+        {
+          key: "actions",
+          label: "操作",
+        },
       ],
       content: [],
       busy: false,
       currentPage: 1,
       totalRow: 0,
-      perPage: 20,
+      perPage: 0,
       order: {
         numCommodity: 0,
         valueCommodity: 0,
@@ -122,7 +133,7 @@ export default {
       this.$api.order
         .selectOrderPage({
           currentPage: page,
-          perPage: 20,
+          perPage: 18,
           uid: this.$cookies.get("uid"),
         })
         .then((res) => {
@@ -194,6 +205,26 @@ export default {
         .catch((err) => {
           console.error(err);
           this.notify("新增订单失败", "danger", 3000);
+          this.busy = false;
+        });
+    },
+    handleDelete: function (order) {
+      console.log(order);
+      this.busy = true;
+      this.$api.order
+        .deleteOrder({ idOrder: order.idOrder })
+        .then((res) => {
+          if (res.data.message === constants.success) {
+            this.selectOrderPage(this.currentPage);
+            this.notify("删除订单成功.", "success", 3000);
+          } else {
+            this.notify("删除订单失败.", "danger", 3000);
+          }
+          this.busy = false;
+        })
+        .catch((err) => {
+          console.error(err);
+          this.notify("删除订单失败.", "danger", 3000);
           this.busy = false;
         });
     },

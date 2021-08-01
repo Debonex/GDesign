@@ -6,5 +6,8 @@ export default {
   },
   insertOrder: params => {
     return request.get("/order/insertOrder", params);
+  },
+  deleteOrder: params => {
+    return request.get("/order/deleteOrder", params);
   }
 };
