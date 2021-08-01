@@ -46,7 +46,6 @@
 <script>
 import GAlert from "@/components/GAlert.vue";
 import constants from "@/constants/constants.js";
-let timer = null;
 export default {
   components: {
     GAlert,
@@ -106,49 +105,30 @@ export default {
           uid: this.$cookies.get("uid"),
         })
         .then((res) => {
-          this.currentPage = res.data.content.currentPage;
           this.totalRow = res.data.content.totalRow;
-          this.content = [];
-          res.data.content.commodityList.forEach((commodity) => {
-            this.content.push({
-              idCommodity: commodity.idCommodity,
-              title: commodity.title,
-              specification: commodity.specification,
-              value: commodity.value,
-            });
-          });
-          this.busy = false;
-        })
-        .catch((err) => {
-          console.error(err);
+          this.content = res.data.content.commodityList;
           this.busy = false;
         });
     },
     handleAddCommodity() {
-      this.$api.commodity
-        .addCommodity(this.commodity)
-        .then((res) => {
-          if (res.data.message === constants.success) {
-            this.notify("上传商品成功!", "success", 3000);
-            this.commodity = {
-              title: "",
-              specification: "",
-              value: 0.0,
-              entity: 0,
-              timelimit: "",
-            };
-          } else {
-            this.notify("上传商品失败", "danger", 3000);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-          this.notify("上传商品失败", "danger", 3000);
-        });
+      this.busy = true;
+      this.$api.commodity.addCommodity(this.commodity).then((res) => {
+        if (res.data.message === constants.success) {
+          this.notify("上传商品成功!", "success", 3000);
+          this.commodity = {
+            title: "",
+            specification: "",
+            value: 0.0,
+            entity: 0,
+            timelimit: "",
+          };
+          this.busy = false;
+        } else {
+          this.notify(res.data.content, "danger", 3000);
+          this.busy = false;
+        }
+      });
     },
-  },
-  beforeDestroy() {
-    clearTimeout(timer);
   },
 };
 </script>

@@ -139,20 +139,15 @@ export default {
         .then((res) => {
           this.currentPage = res.data.content.currentPage;
           this.totalRow = res.data.content.totalRow;
-          this.content = [];
-          res.data.content.orderList.forEach((order) => {
-            this.content.push({
+          this.content = res.data.content.orderList.map((order) => {
+            return {
               idOrder: order.idOrder,
               title: order.commodity.title,
               numCommodity: order.numCommodity,
               value: order.commodity.value,
               amountOrder: order.amountOrder,
-            });
+            };
           });
-          this.busy = false;
-        })
-        .catch((err) => {
-          console.error(err);
           this.busy = false;
         });
     },
@@ -167,7 +162,6 @@ export default {
           uid: this.$cookies.get("uid"),
         })
         .then((res) => {
-          console.log(res);
           if (res.data.message === constants.success) {
             this.notify("新增订单成功", "success", 3000);
             this.order = {
@@ -176,71 +170,41 @@ export default {
               date: "",
             };
             this.inputCommodity = "";
-            this.$api.order
-              .selectOrderPage({
-                currentPage: this.currentPage,
-                perPage: 20,
-                uid: this.$cookies.get("uid"),
-              })
-              .then((res) => {
-                this.currentPage = res.data.content.currentPage;
-                this.totalRow = res.data.content.totalRow;
-                this.content = [];
-                res.data.content.orderList.forEach((order) => {
-                  this.content.push({
-                    idOrder: order.idOrder,
-                    title: order.commodity.title,
-                    numCommodity: order.numCommodity,
-                    value: order.commodity.value,
-                    amountOrder: order.amountOrder,
-                  });
-                });
-                this.busy = false;
-              });
+            this.selectOrderPage(this.currentPage);
+            this.busy = false;
           } else {
-            this.notify("新增订单失败", "danger", 3000);
+            this.notify(res.data.content, "danger", 3000);
             this.busy = false;
           }
-        })
-        .catch((err) => {
-          console.error(err);
-          this.notify("新增订单失败", "danger", 3000);
-          this.busy = false;
         });
     },
     handleDelete: function (order) {
       console.log(order);
       this.busy = true;
-      this.$api.order
-        .deleteOrder({ idOrder: order.idOrder })
-        .then((res) => {
-          if (res.data.message === constants.success) {
-            this.selectOrderPage(this.currentPage);
-            this.notify("删除订单成功.", "success", 3000);
-          } else {
-            this.notify("删除订单失败.", "danger", 3000);
-          }
-          this.busy = false;
-        })
-        .catch((err) => {
-          console.error(err);
+      this.$api.order.deleteOrder({ idOrder: order.idOrder }).then((res) => {
+        if (res.data.message === constants.success) {
+          this.selectOrderPage(this.currentPage);
+          this.notify("删除订单成功.", "success", 3000);
+        } else {
           this.notify("删除订单失败.", "danger", 3000);
-          this.busy = false;
-        });
+        }
+      });
     },
   },
   watch: {
     inputCommodity(item) {
-      if (!item) return;
+      if (!item) {
+        this.order.valueCommodity = 0;
+        return;
+      }
       this.$api.commodity.searchCommodityList({ keyword: item }).then((res) => {
         this.order.searchList = res.data.content;
         if (/^\d+$/.test(item)) {
-          console.log(item);
           for (let searchItem of this.order.searchList) {
             if (searchItem.idCommodity == item)
               this.order.valueCommodity = searchItem.value;
           }
-        }
+        } else this.order.valueCommodity = 0;
       });
     },
   },
