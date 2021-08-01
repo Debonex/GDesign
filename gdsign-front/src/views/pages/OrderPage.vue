@@ -32,18 +32,22 @@
           <b-button variant="outline-primary" size="md" @click="hide">取消</b-button>
         </div>
       </template>
-      <div>
-        <label class="text-xl font-bold" label-for="input-id">商品ID</label>
-        <b-form-input id="input-id" list="list-commodity" placeholder="输入商品标题或ID" v-model="order.idCommodity"></b-form-input>
-        <datalist id="list-commodity">
-          <option>
+      <label class="text-xl font-bold" label-for="input-id">商品ID</label>
+      <b-input-group>
+        <b-form-input id="input-id" list="list-commodity" placeholder="输入商品标题或ID进行搜索" v-model="inputCommodity"></b-form-input>
+        <b-datalist id="list-commodity">
+          <option v-for="commodity in order.searchList" :key="commodity.idCommodity" :value="commodity.idCommodity">
+            {{commodity.title}}
           </option>
-        </datalist>
-      </div>
+        </b-datalist>
+        <b-input-group-append>
+          <b-button variant="outline-primary">清空</b-button>
+        </b-input-group-append>
+      </b-input-group>
       <label class="text-xl font-bold mt-4 md:mt-8" label-for="input-num">商品数量</label>
       <b-form-input id="input-num" v-model="order.numCommodity" type="number" placeholder="输入商品数量" required></b-form-input>
       <label class="text-xl font-bold mt-4 md:mt-8" label-for="input-value">商品单价（元）</label>
-      <b-form-input id="input-value" v-model="order.valueCommodity" type="number" placeholder="输入商品单价" required></b-form-input>
+      <b-form-input id="input-value" v-model="order.valueCommodity" type="number" placeholder="输入商品单价" readonly></b-form-input>
       <label class="text-xl font-bold mt-4 md:mt-8" label-for="input-amount">订单金额（元）</label>
       <b-form-input id="input-amount" v-model="amountOrder" readonly></b-form-input>
       <label class="text-xl font-bold mt-4 md:mt-8" label-for="input-date">订单日期</label>
@@ -96,11 +100,12 @@ export default {
       totalRow: 0,
       perPage: 20,
       order: {
-        idCommodity: "",
         numCommodity: 0,
         valueCommodity: 0,
         date: "",
+        searchList: [],
       },
+      inputCommodity: "",
     };
   },
   computed: {
@@ -121,7 +126,6 @@ export default {
           uid: this.$cookies.get("uid"),
         })
         .then((res) => {
-          console.log(res.data.content);
           this.currentPage = res.data.content.currentPage;
           this.totalRow = res.data.content.totalRow;
           this.content = [];
@@ -145,7 +149,7 @@ export default {
       this.busy = true;
       this.$api.order
         .insertOrder({
-          idCommodity: this.order.idCommodity,
+          idCommodity: this.inputCommodity,
           numCommodity: this.order.numCommodity,
           valueCommodity: this.order.valueCommodity,
           date: this.order.date,
@@ -156,11 +160,11 @@ export default {
           if (res.data.message === constants.success) {
             this.notify("新增订单成功", "success", 3000);
             this.order = {
-              idCommodity: "",
               numCommodity: 0,
               valueCommodity: 0,
               date: "",
             };
+            this.inputCommodity = "";
             this.$api.order
               .selectOrderPage({
                 currentPage: this.currentPage,
@@ -192,6 +196,21 @@ export default {
           this.notify("新增订单失败", "danger", 3000);
           this.busy = false;
         });
+    },
+  },
+  watch: {
+    inputCommodity(item) {
+      if (!item) return;
+      this.$api.commodity.searchCommodityList({ keyword: item }).then((res) => {
+        this.order.searchList = res.data.content;
+        if (/^\d+$/.test(item)) {
+          console.log(item);
+          for (let searchItem of this.order.searchList) {
+            if (searchItem.idCommodity == item)
+              this.order.valueCommodity = searchItem.value;
+          }
+        }
+      });
     },
   },
 };

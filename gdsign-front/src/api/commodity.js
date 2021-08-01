@@ -6,5 +6,8 @@ export default {
   },
   addCommodity: params => {
     return request.post("/commodity/insertCommodity", params);
+  },
+  searchCommodityList: params => {
+    return request.get("/commodity/searchCommodityList", params);
   }
 };
