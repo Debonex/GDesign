@@ -1,7 +1,7 @@
 <template>
-  <div class="fit">
+  <div class="w-full h-full">
     <g-navbar />
-    <div class="flex fit">
+    <div class="flex w-full h-full">
       <g-sidebar class="pr-2 pl-2 md:pr-10 md:pl-10" />
       <div class="bg-white shadow-lg max-h-max m-8 flex-grow flex-shrink-0">
         <router-view></router-view>

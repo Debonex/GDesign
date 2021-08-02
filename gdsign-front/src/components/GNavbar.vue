@@ -4,7 +4,7 @@
       <i class="fa fa-area-chart mr-2" />Gdesign-
       <span class="text-blue-400 animate-pulse">rec</span>
     </b-navbar-brand>
-    <div class="container-navbar-svg fit absolute left-0 top-0"></div>
+    <div class="container-navbar-svg w-full h-full absolute left-0 top-0"></div>
     <b-navbar-toggle class="z-10 sticky right-2" target="nav-collapse"></b-navbar-toggle>
     <b-collapse class="z-10" id="nav-collapse" is-nav>
       <b-navbar-nav class="ml-auto">
