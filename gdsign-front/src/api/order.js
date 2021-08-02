@@ -9,5 +9,8 @@ export default {
   },
   deleteOrder: params => {
     return request.get("/order/deleteOrder", params);
+  },
+  updateOrder: params => {
+    return request.get("/order/updateOrder", params);
   }
 };

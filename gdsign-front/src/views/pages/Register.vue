@@ -41,7 +41,7 @@ export default {
     };
   },
   methods: {
-    handleRegister: function (e) {
+    handleRegister() {
       this.busy = true;
       this.$api.user.register(this.form).then((res) => {
         const msg = res.data.message;

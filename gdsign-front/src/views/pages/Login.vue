@@ -36,7 +36,7 @@ export default {
     };
   },
   methods: {
-    handleLogin: function () {
+    handleLogin() {
       this.busy = true;
       this.$api.user.login(this.form).then((res) => {
         const msg = res.data.message;
