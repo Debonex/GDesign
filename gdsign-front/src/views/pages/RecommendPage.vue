@@ -58,7 +58,9 @@ export default {
   },
   created() {
     this.$api.core.rec
-      .contentBase()
+      .recommend({
+        uid: this.$cookies.get("uid"),
+      })
       .then((res) => {
         this.content = [];
         res.data.content.forEach((item) => {

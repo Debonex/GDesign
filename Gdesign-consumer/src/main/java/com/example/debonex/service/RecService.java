@@ -1,5 +1,6 @@
 package com.example.debonex.service;
 
+import com.example.debonex.pojo.GResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.stereotype.Service;
@@ -15,14 +16,14 @@ public class RecService {
     @Autowired
     ServiceService serviceService;
 
+
     /**
-     * 基于内容的推荐
-     * @param uid 用户id
-     * @return 推荐商品列表
+     * @param uid user id
+     * @return commodity info list
      */
-    public Object contentBase(Integer uid){
+    public GResponse recommend(int uid) {
         ServiceInstance recService = serviceService.discover("rec-service");
-        String url = recService.getUri().toString()+"/rec/contentBase";
-        return new RestTemplate().getForObject(url,Object.class);
+        String url = recService.getUri().toString() + "/rec";
+        return new RestTemplate().getForObject(url + "?uid=" + uid, GResponse.class);
     }
 }
