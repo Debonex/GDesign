@@ -18,10 +18,6 @@ public class RecController {
     @Autowired
     RecService recService;
 
-    @RequestMapping("/contentBase")
-    public Object getContentBase() {
-        return recService.contentBase(1);
-    }
 
     @RequestMapping("/recommend")
     public GResponse recommend(@RequestParam int uid) {
