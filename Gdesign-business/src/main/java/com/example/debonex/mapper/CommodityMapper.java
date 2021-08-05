@@ -32,9 +32,14 @@ public interface CommodityMapper {
     public int selectCommodityCount();
 
     /**
-     *
      * @param commodity commodity info
      * @return primary key
      */
-    public int insertCommodity(@Param("item")Commodity commodity);
+    public int insertCommodity(@Param("item") Commodity commodity);
+
+    /**
+     * @param keyword search keyword
+     * @return commodity info list
+     */
+    public List<Commodity> searchCommodityList(@Param("keyword") String keyword);
 }

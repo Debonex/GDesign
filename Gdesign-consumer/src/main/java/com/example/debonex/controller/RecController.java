@@ -1,8 +1,10 @@
 package com.example.debonex.controller;
 
+import com.example.debonex.pojo.GResponse;
 import com.example.debonex.service.RecService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -16,9 +18,10 @@ public class RecController {
     @Autowired
     RecService recService;
 
-    @RequestMapping("/contentBase")
-    public Object getContentBase(){
-        return recService.contentBase(1);
+
+    @RequestMapping("/recommend")
+    public GResponse recommend(@RequestParam int uid) {
+        return recService.recommend(uid);
     }
 
 }

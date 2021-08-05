@@ -36,4 +36,28 @@ public class OrderService {
         String url = businessService.getUri().toString() + "/order/insertOrder";
         return new RestTemplate().getForObject(url + "?idCommodity=" + idCommodity + "&numCommodity=" + numCommodity + "&date=" + date + "&uid=" + uid, GResponse.class);
     }
+
+    /**
+     * delete order by id
+     *
+     * @param idOrder order id
+     * @return response
+     */
+    public GResponse deleteOrder(String idOrder) {
+        ServiceInstance businessService = serviceService.discover("business-service");
+        String url = businessService.getUri().toString() + "/order/deleteOrder";
+        return new RestTemplate().getForObject(url + "?idOrder=" + idOrder, GResponse.class);
+    }
+
+    /**
+     * @param idOrder      order id
+     * @param idCommodity  commodity id
+     * @param numCommodity commodity count
+     * @return new order info
+     */
+    public GResponse updateOrder(String idOrder, int idCommodity, int numCommodity) {
+        ServiceInstance businessService = serviceService.discover("business-service");
+        String url = businessService.getUri().toString() + "/order/updateOrder";
+        return new RestTemplate().getForObject(url + "?idOrder=" + idOrder + "&idCommodity=" + idCommodity + "&numCommodity=" + numCommodity, GResponse.class);
+    }
 }

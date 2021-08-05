@@ -16,7 +16,7 @@ businessService = consul.getService('business-service')
 
 class RecHandler(tornado.web.RequestHandler, ABC):
     def get(self):
-        res = cb.recommend(120405)
+        res = cb.recommend(self.get_argument('uid'))
         idList = []
         for item in res:
             idList.append(item[0])

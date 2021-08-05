@@ -47,7 +47,7 @@ public class CommodityService {
             int totalRow = commodityMapper.selectCommodityCount();
             return new GResponse(Constants.SUCCESS, new CommodityPage(list, currentPage, totalRow));
         } catch (Exception e) {
-            return new GResponse(Constants.FAILED);
+            return new GResponse(Constants.FAILED,"服务器错误，获取商品列表失败");
         }
     }
 
@@ -60,7 +60,19 @@ public class CommodityService {
             commodityMapper.insertCommodity(commodity);
             return new GResponse(Constants.SUCCESS);
         } catch (Exception e) {
-            return new GResponse(Constants.FAILED);
+            return new GResponse(Constants.FAILED,"服务器错误，新增商品失败");
+        }
+    }
+
+    /**
+     * @param keyword search keyword
+     * @return commodity info list
+     */
+    public GResponse searchCommodityList(String keyword) {
+        try {
+            return new GResponse(Constants.SUCCESS, commodityMapper.searchCommodityList(keyword));
+        } catch (Exception e) {
+            return new GResponse(Constants.FAILED,"服务器错误，获取商品列表失败");
         }
     }
 }

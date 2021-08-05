@@ -25,7 +25,6 @@
 import indexLayout from "@/views/layout/IndexLayout.vue";
 import constants from "@/constants/constants.js";
 import GAlert from "@/components/GAlert.vue";
-let timer = null;
 export default {
   components: {
     indexLayout,
@@ -42,38 +41,21 @@ export default {
     };
   },
   methods: {
-    handleRegister: function (e) {
+    handleRegister() {
       this.busy = true;
-      this.$api.user
-        .register({
-          uid: this.form.uid,
-          password: this.form.password,
-        })
-        .then((res) => {
-          const msg = res.data.message;
-          if (msg === constants.user.register.success) {
-            this.$store.commit("notify", ["注册成功", "success"]);
-            timer = setTimeout(() => {
-              this.$store.commit("removeNotify");
-              this.$router.push("/login");
-              this.busy = false;
-            }, 1500);
-          } else {
-            this.$store.commit("notify", ["注册失败", "danger"]);
-            timer = setTimeout(() => {
-              this.$store.commit("removeNotify");
-            }, 5000);
+      this.$api.user.register(this.form).then((res) => {
+        const msg = res.data.message;
+        if (msg === constants.user.register.success) {
+          this.notify("注册成功!", "success", 3000);
+          setTimeout(() => {
+            this.$router.push("/login");
             this.busy = false;
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-          this.$store.commit("notify", ["注册失败", "danger"]);
-          timer = setTimeout(() => {
-            this.$store.commit("removeNotify");
-          }, 5000);
+          }, 1000);
+        } else {
+          this.notify(res.data.content, "danger", 3000);
           this.busy = false;
-        });
+        }
+      });
     },
   },
 };

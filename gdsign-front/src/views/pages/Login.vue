@@ -21,7 +21,6 @@
 import indexLayout from "@/views/layout/IndexLayout.vue";
 import constants from "@/constants/constants.js";
 import GAlert from "@/components/GAlert.vue";
-let timer = null;
 export default {
   components: {
     indexLayout,
@@ -37,45 +36,24 @@ export default {
     };
   },
   methods: {
-    handleLogin: function () {
+    handleLogin() {
       this.busy = true;
-      this.$api.user
-        .login({
-          uid: this.form.uid,
-          password: this.form.password,
-        })
-        .then((res) => {
-          const msg = res.data.message;
-          if (msg === constants.user.login.success) {
-            this.$cookies.set("uid", this.form.uid);
-            this.$store.commit("notify", ["登录成功", "success"]);
-            timer = setTimeout(() => {
-              this.$router.push("/home");
-              this.$store.commit("removeNotify");
-              this.busy = false;
-            }, 2000);
-          }
-          if (msg === constants.user.login.failed) {
-            this.$store.commit("notify", ["登录失败", "danger"]);
-            timer = setTimeout(() => {
-              this.$store.commit("removeNotify");
-            }, 5000);
+      this.$api.user.login(this.form).then((res) => {
+        const msg = res.data.message;
+        if (msg === constants.user.login.success) {
+          this.$cookies.set("uid", this.form.uid);
+          this.notify("登录成功!", "success", 1000);
+          setTimeout(() => {
+            this.$router.push("/home");
             this.busy = false;
-          }
-        })
-        .catch((err) => {
-          this.$store.commit("notify", ["登录失败", "danger"]);
-          timer = setTimeout(() => {
-            this.$store.commit("removeNotify");
-          }, 5000);
-          console.error(err);
+          }, 1000);
+        } else {
+          this.notify(res.data.message, "danger", 3000);
           this.busy = false;
-        });
+        }
+      });
     },
-  },
-  beforeDestroy() {
-    clearTimeout(timer);
-  },
+  }
 };
 </script>
 

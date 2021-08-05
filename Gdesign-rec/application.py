@@ -32,7 +32,7 @@ def main():
     app = tornado.web.Application(
         [
             (r"/actuator/health", HealthChecker),
-            (r"/rec/contentBase", RecHandler)
+            (r"/rec", RecHandler)
         ]
     )
     http_server = tornado.httpserver.HTTPServer(app)

@@ -2,6 +2,7 @@ package com.example.debonex.service;
 
 import com.example.debonex.constants.Constants;
 import com.example.debonex.mapper.OrderMapper;
+import com.example.debonex.pojo.Commodity;
 import com.example.debonex.pojo.GResponse;
 import com.example.debonex.pojo.Order;
 import com.example.debonex.pojo.OrderPage;
@@ -35,7 +36,7 @@ public class OrderService {
             return new GResponse(Constants.SUCCESS, res);
         } catch (Exception e) {
             e.printStackTrace();
-            return new GResponse(Constants.FAILED);
+            return new GResponse(Constants.FAILED, "服务器错误，获取订单列表失败");
         }
     }
 
@@ -67,8 +68,47 @@ public class OrderService {
             return new GResponse(Constants.SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
-            return new GResponse(Constants.FAILED);
+            return new GResponse(Constants.FAILED, "服务器错误，新增订单失败");
         }
+    }
 
+    /**
+     * delete order by order id
+     *
+     * @param idOrder order id
+     * @return response
+     */
+    public GResponse deleteOrder(String idOrder) {
+        try {
+            orderMapper.deleteOrder(idOrder);
+            return new GResponse(Constants.SUCCESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new GResponse(Constants.FAILED, "服务器错误，删除订单失败");
+        }
+    }
+
+    /**
+     * @param idOrder      order id
+     * @param idCommodity  commodity id
+     * @param numCommodity commodity count
+     * @return response
+     */
+    public GResponse updateOrder(String idOrder, int idCommodity, int numCommodity) {
+        try {
+            Order oldOrder = orderMapper.selectOrder(idOrder);
+            Order newOrder = new Order();
+            Commodity newCommodity = commodityService.selectCommodity(idCommodity);
+            newOrder.setIdCommodity(idCommodity);
+            newOrder.setNumCommodity(numCommodity);
+            newOrder.setAmountOrder(numCommodity * newCommodity.getValue());
+            newOrder.setIdOrder(idOrder);
+            newOrder.setUid(oldOrder.getUid());
+            orderMapper.updateOrder(newOrder);
+            return new GResponse(Constants.SUCCESS, newOrder);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new GResponse(Constants.FAILED, "服务器错误，修改订单失败");
+        }
     }
 }
