@@ -53,10 +53,7 @@ export default {
         }
       });
     },
-  },
-  beforeDestroy() {
-    clearTimeout(timer);
-  },
+  }
 };
 </script>
 
