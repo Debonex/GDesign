@@ -1,4 +1,4 @@
-# gdsign-front
+# gdesign-front
 
 > A Vue.js project
 

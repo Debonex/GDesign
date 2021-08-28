@@ -8,9 +8,9 @@
 		<version>2.5.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>debonex</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<groupId>cn.debonex.gdesign</groupId>
+	<artifactId>consumer</artifactId>
+	<version>0.1.0</version>
 	<name>Gdesign-consumer</name>
 	<description>consumer service</description>
 	<properties>
@@ -63,6 +63,7 @@
 	</dependencyManagement>
 
 	<build>
+		<finalName>consumer-service</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

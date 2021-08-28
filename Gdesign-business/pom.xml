@@ -8,9 +8,9 @@
 		<version>2.5.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>debonex</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<groupId>cn.debonex.gdesign</groupId>
+	<artifactId>business</artifactId>
+	<version>0.1.0</version>
 	<name>Gdsign-business</name>
 	<description>gdsign business backend</description>
 	<properties>
@@ -80,6 +80,7 @@
 	</dependencyManagement>
 
 	<build>
+		<finalName>business-service</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
